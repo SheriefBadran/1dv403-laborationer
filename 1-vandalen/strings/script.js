@@ -5,35 +5,35 @@ window.onload = function(){
 	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var convertString = function(str){
 		// Plats för förändring.		
-		// Returnera den konverterade strängen.
-		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
-		// Jag tycker JAVASCRIPT är KUL
-
 		if(str === ""){
 			throw { message: "FEL! Fältet måste innehålla en sträng." };
 		}
 
-		var superConvertedString, convertedString = "",
+		// SuperConvertedString will contain the final converted string that this function returns.
+		var superConvertedString, 
+		convertedString = "",
 		stringArray = [];
 
 		var i;
 		for (i = 0; i < str.length; i++) {
 			if(str[i].match(/([A-ZÅÄÖ])/g)){
-				// Gör om till lowercase.
+				// For all uppercase letters in the string, convert them to lowercase and insert them into stringArray.
 				stringArray[i] = str[i].replace(/([A-ZÅÄÖ])/g, str[i].toLowerCase());
 			}
 			else{
-				// Gör om till uppercase.
+				// For all lowercse letters in the string, convert them to uppercase and insert them into stringArray.
 				stringArray[i] = str[i].replace(/([a-zåäö])/g, str[i].toUpperCase());
 			}
 		}
 
+		// Assamble all elements (lettrs) in stringArray back to one string value.
 		var e;
 		for (e = 0; e < stringArray.length; e++) {
 			convertedString += stringArray[e];
 			console.log(stringArray[e]);
 		}
 
+		// Convert both lower and -uppercase "A" to "#".
 		superConvertedString = convertedString.replace(/A/gi, "#");
 
 		return superConvertedString;
