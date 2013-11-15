@@ -16,7 +16,8 @@ window.onload = function(){
 		//var stringArray = str.match(/[A-Z][a-z]+/g);
 		//var stringArray = str.match(/([A-Z]?[^A-Z]*)/g).slice(0, -1);
 		//console.log(stringArray);
-
+		var convertedString;
+		var stringArray = [];
 
 		for (var i = 0; i < str.length; i++) {
 
@@ -29,11 +30,11 @@ window.onload = function(){
 			// }
 			if(str[i].match(/([A-Z])/g)){
 				// Gör om till lowercase.
-				console.log("liten");
+				stringArray[i] = str[i].replace(/([A-Z])/g, str[i].toLowerCase());
 			}
 			else{
 				// Gör om till uppercase.
-				console.log("stor");
+				stringArray[i] = str[i].replace(/([a-z])/g, str[i].toUpperCase());
 			}
 			//console.log(str[i].replace(/([A-Z])/g, str[i].toLowerCase()));
 
@@ -41,9 +42,15 @@ window.onload = function(){
 			// 2. Gör om alla små bokstäver i original-strängen till up
 		}
 
+		for (var x = 0; x < stringArray.length; x++) {
+			convertedString += stringArray[x];
+			console.log(stringArray[x]);
+		}
 
-
-
+		// var abc = 'a';
+		// abc += 'b';
+		// console.log(typeof abc);
+		console.log(convertedString);
 
 
 
