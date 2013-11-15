@@ -7,54 +7,38 @@ window.onload = function(){
 		// Plats för förändring.		
 		// Returnera den konverterade strängen.
 		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
-		
 		// Jag tycker JAVASCRIPT är KUL
-		// string.replace
-		// string.toLowerCase()
-		// string.toUpperCase()
-		console.log(str);
-		//var stringArray = str.match(/[A-Z][a-z]+/g);
-		//var stringArray = str.match(/([A-Z]?[^A-Z]*)/g).slice(0, -1);
-		//console.log(stringArray);
-		var convertedString;
-		var stringArray = [];
 
-		for (var i = 0; i < str.length; i++) {
+		if(str === ""){
+			throw { message: "FEL! Fältet måste innehålla en sträng." };
+		}
 
-			//console.log(str.charAt(i).match(/([A-Z]+)/g));
-			// if(str[i].match(/([A-Z]+)/g) != null)
-			// {
-			// 	console.log(str[i].match(/([A-Z]+)/g));
-			// 	//str[i].match(/[A-Z][a-z]+/g);
+		var superConvertedString, convertedString = "",
+		stringArray = [];
 
-			// }
-			if(str[i].match(/([A-Z])/g)){
+		var i;
+		for (i = 0; i < str.length; i++) {
+			if(str[i].match(/([A-ZÅÄÖ])/g)){
 				// Gör om till lowercase.
-				stringArray[i] = str[i].replace(/([A-Z])/g, str[i].toLowerCase());
+				stringArray[i] = str[i].replace(/([A-ZÅÄÖ])/g, str[i].toLowerCase());
 			}
 			else{
 				// Gör om till uppercase.
-				stringArray[i] = str[i].replace(/([a-z])/g, str[i].toUpperCase());
+				stringArray[i] = str[i].replace(/([a-zåäö])/g, str[i].toUpperCase());
 			}
-			//console.log(str[i].replace(/([A-Z])/g, str[i].toLowerCase()));
-
-			// 1. Spara undan alla små bokstäver i original-strängen i en enskild array.
-			// 2. Gör om alla små bokstäver i original-strängen till up
 		}
 
-		for (var x = 0; x < stringArray.length; x++) {
-			convertedString += stringArray[x];
-			console.log(stringArray[x]);
+		var e;
+		for (e = 0; e < stringArray.length; e++) {
+			convertedString += stringArray[e];
+			console.log(stringArray[e]);
 		}
 
-		// var abc = 'a';
-		// abc += 'b';
-		// console.log(typeof abc);
-		console.log(convertedString);
+		superConvertedString = convertedString.replace(/A/gi, "#");
 
-
-
+		return superConvertedString;
 	};
+
 	// ------------------------------------------------------------------------------
 
 
