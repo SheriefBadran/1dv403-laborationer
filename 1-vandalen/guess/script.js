@@ -45,8 +45,6 @@ window.onload = function(){
 	
 	// ------------------------------------------------------------------------------
 
-
-
 	// Kod för att hantera utskrift och inmatning. Denna ska du inte behöva förändra
 	var p = document.querySelector("#value"); // Referens till DOM-noden med id="#value"
 	var input = document.querySelector("#number");
