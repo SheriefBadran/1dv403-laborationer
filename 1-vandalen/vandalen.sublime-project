@@ -1,0 +1,26 @@
+{
+	"folders":
+	[
+		{
+			"path": "guess"
+		},
+		{
+			"path": "strings"
+		},
+		{
+			"path": "birthday"
+		},
+		{
+			"path": "vandalen"
+		},
+		{
+			"path": "tests"
+		},
+		{
+			"path": "../../javascript"
+		},
+		{
+			"path": "../../../"
+		}
+	]
+}

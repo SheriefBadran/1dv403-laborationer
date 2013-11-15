@@ -1,22 +1,46 @@
 "use strict";
 
 window.onload = function(){
-	
-	var secret = 50; // Detta tal behöver bytas ut mot ett slumpat tal.
+	var count = 0;
+
+	function getRandomInt(min, max){
+		return Math.floor(Math.random() * (max - min) + 1) + min;
+	}
+
+
+	var secret = getRandomInt(1, 100); // Detta tal behöver bytas ut mot ett slumpat tal.
 	
 	// I denna funktion ska du skriva koden för att hantera "spelet"
-	var guess = function(number){
-		console.log("Det hemliga talet: " + secret); // Du når den yttre variabeln secret innifrån funktionen.
-		console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
-			
-		// Plats för förändring.
+	var guess = function(number){			
 
+		// Parse to int if this function is used in a context were argumet comes as a string.
+		if(typeof number === "string"){
+			number = parseInt(number);
+		}
+		
+		var message;
+		count++;
+		
+		if(isNaN(number)){
+			console.log("Error!! Your guess has to be an integer...");
+			message = [false, "Error!! Your guess has to be an integer..."];
+		}
+		else if(number < 0 || number > 100){
+			message = [false, "Error!! Guess a number greater than 0 and lower than 100..."];
+		}
+		else{
+			if(number > secret){
+				message = [false, number + " is not the number, my number is lower!"];
+			}
+			else if(number < secret){
+				message = [false, number + " is not the number, my number is higher!"];
+			}
+			else{
+				message = [true, "You got the correct answer in " + count + " guesses!"];
+			}
+		}
 
-		// Returnera exempelvis: 
-		// [true, "Grattis du vann! Det hemliga talet var X och du behövde Y gissningar för att hitta det."]
-		// [false, "Det hemliga talet är högre!"]
-		// [false, "Det hemliga talet är lägre!"]
-		// [false, "Talet är utanför intervallet 0 - 100"]		
+		return message;		
 	};
 	
 	// ------------------------------------------------------------------------------
@@ -32,8 +56,9 @@ window.onload = function(){
 	submit.addEventListener("click", function(e){
 		e.preventDefault(); // Hindra formuläret från att skickas till servern. Vi hanterar allt på klienten.
 
-		var answer = guess(input.value) // Läser in talet från textrutan och skickar till funktionen "guess"
+		var answer = guess(input.value);// Läser in talet från textrutan och skickar till funktionen "guess"
 		p.innerHTML = answer[1];		// Skriver ut texten från arrayen som skapats i funktionen.	
+		input.value = "";				// Clear input field after each guess.
 
 		if(answer[0] === true){				// Om spelet är slut, avaktivera knappen.
 			submit.disabled = true;
