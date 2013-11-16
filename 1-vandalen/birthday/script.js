@@ -8,13 +8,21 @@ window.onload = function(){
 
 
 			// Din kod här.
+			var splitDate;
+			var oneDay = 1000 * 60 * 60 * 24;
+
+			splitDate = date.split('-');
+			console.log(splitDate);
+
+
 			var now = new Date();
-			var end = new Date(2013, 12, 20);
-			var remainingTime = end.getTime() - now.getTime();
+			var birthday = new Date(splitDate[0], splitDate[1] - 1, splitDate[2]);
+			var remainingMilliSeconds = (birthday.getTime() - now.getTime());
+			var remainingDays = remainingMilliSeconds/oneDay;
 
 			console.log("current date: " + now.getTime());
-			console.log("birthday date: " + end.getTime());
-			console.log("time left to birthday: " + remainingTime/1000 + " seconds.");
+			console.log("birthday date: " + birthday.getTime());
+			console.log("time left to birthday: " + remainingDays + " days.");
 
 
 
