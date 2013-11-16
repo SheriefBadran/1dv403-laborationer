@@ -5,26 +5,24 @@ window.onload = function(){
 	
 	var birthday = function(date){
 		
-
-
 			// Din kod här.
-			var splitDate;
-			var oneDay = 1000 * 60 * 60 * 24;
 
+			var splitDate,
+			oneDayInMilliSeconds = 1000 * 60 * 60 * 24,
+
+			// Get current date in milliseconds
+			now = new Date(),
+			birthday, remainingMilliSeconds, remainingDays;
+
+			// Split end-date into [yyyy, mm, dd]
 			splitDate = date.split('-');
-			console.log(splitDate);
 
+			// Create a birthday Date - variable and compensate for month-value (incorrect in current date)
+			birthday = new Date(splitDate[0], splitDate[1] - 1, splitDate[2]);
+			remainingMilliSeconds = (birthday.getTime() - now.getTime());
+			remainingDays = remainingMilliSeconds/oneDayInMilliSeconds;
 
-			var now = new Date();
-			var birthday = new Date(splitDate[0], splitDate[1] - 1, splitDate[2]);
-			var remainingMilliSeconds = (birthday.getTime() - now.getTime());
-			var remainingDays = remainingMilliSeconds/oneDay;
-
-			console.log("current date: " + now.getTime());
-			console.log("birthday date: " + birthday.getTime());
-			console.log("time left to birthday: " + remainingDays + " days.");
-
-
+			return Math.ceil(remainingDays);
 
 	};
 	// ------------------------------------------------------------------------------
