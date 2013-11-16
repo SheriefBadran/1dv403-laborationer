@@ -7,6 +7,11 @@ window.onload = function(){
 		
 			// Din kod här.
 
+			if(!date.match(/^(\d{4})([\/-])(\d{1,2})\2(\d{1,2})$/))
+			{
+				throw { message: "Fel! Ange födelsedatum på formatet ÅÅÅÅ-MM-DD." };
+			}
+
 			var splitDate,
 			oneDayInMilliSeconds = 1000 * 60 * 60 * 24,
 
