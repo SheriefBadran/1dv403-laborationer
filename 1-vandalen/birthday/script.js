@@ -8,7 +8,13 @@ window.onload = function(){
 
 
 			// Din kod här.
+			var now = new Date();
+			var end = new Date(2013, 12, 20);
+			var remainingTime = end.getTime() - now.getTime();
 
+			console.log("current date: " + now.getTime());
+			console.log("birthday date: " + end.getTime());
+			console.log("time left to birthday: " + remainingTime/1000 + " seconds.");
 
 
 
@@ -28,7 +34,7 @@ window.onload = function(){
 		p.classList.remove( "error");
 
 		try {
-			var answer = birthday(input.value) // Läser in texten från textrutan och skickar till funktionen "convertString"
+			var answer = birthday(input.value); // Läser in texten från textrutan och skickar till funktionen "convertString"
 			var message;
 			switch (answer){
 				case 0: message = "Grattis på födelsedagen!";
