@@ -16,7 +16,7 @@ window.onload = function(){
 			oneDayInMilliSeconds = 1000 * 60 * 60 * 24,
 
 			// Get current date in milliseconds
-			now = new Date(),
+			currentDate = new Date(),
 			birthday, remainingMilliSeconds, remainingDays;
 
 			// Split end-date into [yyyy, mm, dd]
@@ -24,7 +24,7 @@ window.onload = function(){
 
 			// Create a birthday Date - variable and compensate for month-value (incorrect in current date)
 			birthday = new Date(splitDate[0], splitDate[1] - 1, splitDate[2]);
-			remainingMilliSeconds = (birthday.getTime() - now.getTime());
+			remainingMilliSeconds = (birthday.getTime() -	currentDate.getTime());
 
 			// Round remainingDays (negative and positive) upwards to get correct result since day is switched to next day 12:00
 			remainingDays = Math.ceil(remainingMilliSeconds/oneDayInMilliSeconds);
