@@ -6,10 +6,6 @@ window.onload = function(){
 	var birthday = function(date){
 		
 			// Din kod här.
-
-			//Clear input field
-
-
 			// Check if date input is on the format YYYY-MM-DD, if not, throw an exception
 			if(!date.match(/^(\d{4})([\/-])(\d{1,2})\2(\d{1,2})$/))
 			{
