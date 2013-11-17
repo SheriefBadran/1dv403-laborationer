@@ -6,7 +6,6 @@ var makePerson = function(persArr){
 	var personAges;
 	var personNames;
 	var personObj = {};
-	//var minAge;
 	var ageSum;
 
 	console.log(persArr);
@@ -43,6 +42,9 @@ var makePerson = function(persArr){
 	personObj.minAge = personAges.reduce(function(prevAge, age, i, personAges){
 		return Math.min(prevAge, age);
 	});
+
+	// Sort personNames alphabetically
+	personNames.sort();
 
 	// Assamble all names to one string and initialize it to personObj
 	personObj.names = personNames.reduce(function(prevName, name, i, personNames){
