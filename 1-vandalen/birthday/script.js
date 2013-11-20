@@ -23,17 +23,22 @@ window.onload = function(){
 			splitDate = date.split('-');
 
 			// Create a birthday Date - variable and compensate for month-value (incorrect in current date)
-			birthday = new Date(splitDate[0], splitDate[1] - 1, splitDate[2]);
+			birthday = new Date(currentDate.getFullYear(), splitDate[1] - 1, splitDate[2]);
+
+
+			if(birthday.getTime() < currentDate.getTime() && birthday.getDate() !== currentDate.getDate()){
+				birthday.setFullYear(currentDate.getFullYear() + 1);
+			}
+			
 			remainingMilliSeconds = (birthday.getTime() -	currentDate.getTime());
 
 			// Round remainingDays (negative and positive) upwards to get correct result since day is switched to next day 12:00
 			remainingDays = Math.ceil(remainingMilliSeconds/oneDayInMilliSeconds);
 
 			// Check if date input is a previous date, if not, throw an exception
-			if(remainingDays < 0) { throw{ message: "Error! Ange ett födelsedatum framåt i tiden." }; }
+			//if(remainingDays < 0) { throw{ message: "Error! Ange ett födelsedatum framåt i tiden." }; }
 
 			return remainingDays;
-
 	};
 	// ------------------------------------------------------------------------------
 
