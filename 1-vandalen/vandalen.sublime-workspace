@@ -4,6 +4,82 @@
 		"selected_items":
 		[
 			[
+				"get",
+				"getText"
+			],
+			[
+				"con",
+				"constructor"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"inA",
+				"inAProto"
+			],
+			[
+				"age",
+				"age"
+			],
+			[
+				"ha",
+				"hasOwnProperty"
+			],
+			[
+				"pre",
+				"personAges"
+			],
+			[
+				"per",
+				"personObj"
+			],
+			[
+				"person",
+				"personNames"
+			],
+			[
+				"re",
+				"reduce"
+			],
+			[
+				"min",
+				"minAge"
+			],
+			[
+				"pers",
+				"persArr"
+			],
+			[
+				"remaining",
+				"remainingDays"
+			],
+			[
+				"rema",
+				"remainingMilliSeconds"
+			],
+			[
+				"split",
+				"splitDate"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"to",
+				"toLowerCase"
+			],
+			[
+				"string",
+				"stringArray"
+			],
+			[
+				"my",
+				"myNumber"
+			],
+			[
 				"pro",
 				"property"
 			],
@@ -24,11 +100,51 @@
 	"buffers":
 	[
 		{
-			"file": "index.html",
+			"file": "vandalen.sublime-project",
 			"settings":
 			{
-				"buffer_size": 474,
+				"buffer_size": 240,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Applications/MAMP/htdocs/www/webbteknik1/Gruntfile.js",
+			"settings":
+			{
+				"buffer_size": 1816,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vandalen/index.html",
+			"settings":
+			{
+				"buffer_size": 552,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vandalen/script.js",
+			"settings":
+			{
+				"buffer_size": 2216,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "tests/vandalen.js",
+			"settings":
+			{
+				"buffer_size": 2228,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "birthday/script.js",
+			"settings":
+			{
+				"buffer_size": 2452,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -64,6 +180,17 @@
 	},
 	"file_history":
 	[
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/vandalen/test.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/vandalen/index1.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/tests/qunit.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/birthday/script.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/birthday/index.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/strings/script.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/strings/index.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/guess/index.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/guess/script.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/javascript/secretnumber.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/index.html",
 		"/Applications/MAMP/htdocs/www/webbteknik1/lecture1.js",
 		"/Users/sheriefbadran/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Applications/MAMP/htdocs/www/webbteknik1/package.json",
@@ -72,7 +199,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -86,6 +213,27 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"!>",
+			"f",
+			"test",
+			"null",
+			"true",
+			"<script src=\"../tests/qunit.js\"></script>",
+			"minAge",
+			"personAges",
+			"D",
+			"d",
+			"D",
+			"d",
+			"D",
+			"d",
+			"now",
+			"oneDay",
+			"end",
+			"u",
+			"x",
+			"myNumber",
+			"number",
 			"var1"
 		],
 		"highlight": true,
@@ -104,28 +252,166 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "index.html",
+					"file": "vandalen.sublime-project",
 					"settings":
 					{
-						"buffer_size": 474,
+						"buffer_size": 240,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								66,
-								120
+								229,
+								229
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Applications/MAMP/htdocs/www/webbteknik1/Gruntfile.js",
+					"settings":
+					{
+						"buffer_size": 1816,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								806,
+								806
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 361.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "vandalen/index.html",
+					"settings":
+					{
+						"buffer_size": 552,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								273,
+								273
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "vandalen/script.js",
+					"settings":
+					{
+						"buffer_size": 2216,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								105,
+								105
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "tests/vandalen.js",
+					"settings":
+					{
+						"buffer_size": 2228,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1217,
+								1217
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "birthday/script.js",
+					"settings":
+					{
+						"buffer_size": 2452,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1216,
+								1216
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

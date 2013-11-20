@@ -7,12 +7,13 @@ var makePerson = function(persArr){
 	var personNames;
 	var personObj = {};
 	var ageSum;
+	var age;
 
 	console.log(persArr);
 
 	// Filter out all person arrays that don't have the born property.
 	persons = persArr.filter(function(person, i){
-		return !person.hasOwnProperty('born');
+		return !person.hasOwnProperty('born') && typeof person.name === "string" && typeof person.age === "number";
 	});
 
 	// Retrieve age values from all objects in the array.
@@ -25,6 +26,7 @@ var makePerson = function(persArr){
 		return person.name;
 	});
 
+	console.log(personAges);
 	// Sum all ages.
 	ageSum = personAges.reduce(function(prevAge, age, i, personAges){
 		return prevAge + age;
@@ -43,33 +45,15 @@ var makePerson = function(persArr){
 		return Math.min(prevAge, age);
 	});
 
-	// Sort personNames alphabetically
-	personNames.sort();
+	// Sort personNames alphabetically with additional respect to swedish letters "å, ä and ö"
+	personNames.sort(function(a, b){
+		return a.localeCompare(b);
+	});
 
 	// Assamble all names to one string and initialize it to personObj
 	personObj.names = personNames.reduce(function(prevName, name, i, personNames){
 		return prevName + ", " + name;
 	});
 
-	console.log(persons);
-	console.log(personObj.averageAge);
-	console.log(personAges);
-	console.log(personNames);
-	console.log(personObj);
-
 	return personObj;
-
-	// Calculate maxAge
-
-	// Calculate averageAge
-
-	// Create string containing all the persons names
-
-	// Create an object containing all data
-
-	// return the object
 };
-
-//var persons = [{ name: "John Häggerud", age: 36 }, { name: "Johan Leitet", age: 37 }, { name: "Mats Loock", age: 47 }];
-
-//var result = makePerson(persons);

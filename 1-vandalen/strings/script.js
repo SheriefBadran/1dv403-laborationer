@@ -26,11 +26,11 @@ window.onload = function(){
 			}
 		}
 
-		// Assamble all elements (lettrs) in stringArray back to one string value.
+		// Assamble all elements (letters) in stringArray back to one string value.
 		var e;
 		for (e = 0; e < stringArray.length; e++) {
 			convertedString += stringArray[e];
-			console.log(stringArray[e]);
+			//console.log(stringArray[e]);
 		}
 
 		// Convert both lower and -uppercase "A" to "#".
