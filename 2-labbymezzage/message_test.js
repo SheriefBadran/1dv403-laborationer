@@ -61,8 +61,21 @@ LABBY.mezzage.Message = (function()
 	}
 
 	var _user = function(name, messageObj){
+		// FIRST EXPERIMENT
+		// this.name = name;
+		// this.message = messageObj.message;
+		// this.date = messageObj.date;
+
+		// SECOND EXPERIMENT
+		// return {
+		// 	name: name,
+		// 	message: messageObj.text,
+		// 	date: messageObj.date
+		// };
+
+		//THIRD EXPERIMENT
 		this.name = name;
-		this.message = messageObj.message;
+		this.message = messageObj.text;
 		this.date = messageObj.date;
 	}
 	
@@ -79,9 +92,19 @@ LABBY.mezzage.Message = (function()
 	Constr.prototype = {
 		// Constructor Functions
 
-		user: function(name){
-			this.setMessage = _setMessage;
-			this.getMessage = _getMessage;
+		user: function(name, messageObj){
+			// FIRST EXPERIMENT
+			// this.setMessage = _setMessage;
+			// this.getMessage = _getMessage;
+
+			// SECOND EXPERIMENT
+			// var userObj = _user(name, messageObj);
+			// this.name = userObj.name;
+			// this.message = userObj.message;
+			// this.date = userObj.date;
+
+			// THIRD EXPERIMENT
+			return this.User = _user;
 		},
 
 		// Privileged Constructor function that returns a reference to private method

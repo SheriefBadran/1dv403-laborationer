@@ -1,31 +1,4 @@
 window.onload = function(){
-	// var messageHandler1 = new LABBY.mezzage.Message({text: "hur", date: "date1"});
-	// var messageHandler2 = new LABBY.mezzage.Message({text: "mår", date: "date2"});
-	// // messageHandler1.getMessage.prototype.toString = function(){
-	// // 	return "hej";
-	// // }
-	// console.log(messageHandler1);
-	// console.log(messageHandler2);
-
-	// var config = {
-	// 	message: "hej",
-	// 	date: "date1"
-	// };
-
-
-	// messageHandler1.setMessage({text: "hej", date: "date1"});
-	// //print message
-	// console.log(messageHandler1.getMessage(0).text);
-	// var GetMessage = new messageHandler1.getMessage(0);
-	// console.log(GetMessage.text);
-
-
-	// console.log(GetMessage);
-	// console.log(GetMessage);
-
-
-
-	//------------------------------------------------------------------------------------------
 
 	printMessage();
 	// Kod för att hantera utskrift och inmatning. Denna ska du inte behöva förändra
@@ -46,28 +19,19 @@ window.onload = function(){
 		//if(answer[0] === true){				// Om spelet är slut, avaktivera knappen.
 			//submit.disabled = true;
 		//}
-	
 	});
 };
 
 var printMessage = function(){
 	index = -1;
-	var messageHandler1 = new LABBY.mezzage.Message();
-
-	var SetMessage = new messageHandler1.setMessage();
-
-	var GetMessage = new messageHandler1.getMessage();
-
-	var User = new messageHandler1.user();
+	//var messageHandler1 = new LABBY.mezzage.Message();
+	var messageHandler1 = new Message();
 
 	printMessage = function(message){
 		index++;
-		//messageHandler1.setMessage({text: message, date: "date1"});
-		SetMessage({text: message, date: "date1"});
 
-		console.log(User("Sherief", {text: message, date: "date1"}));
-		console.log(GetMessage(index).text);
+		messageHandler1.setMessage({text: message, date: "date2"});
 
-		return GetMessage(index).text;
+		return messageHandler1.getMessage(index).text;
 	}
 }

@@ -9,7 +9,6 @@ var makePerson = function(persArr){
 	var ageSum;
 	var age;
 
-	console.log(persArr);
 
 	// Filter out all person arrays that don't have the born property.
 	persons = persArr.filter(function(person, i){
@@ -26,9 +25,8 @@ var makePerson = function(persArr){
 		return person.name;
 	});
 
-	console.log(personAges);
 	// Sum all ages.
-	ageSum = personAges.reduce(function(prevAge, age, i, personAges){
+	ageSum = personAges.reduce(function(prevAge, age){
 		return prevAge + age;
 	});
 

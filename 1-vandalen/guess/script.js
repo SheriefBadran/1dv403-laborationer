@@ -25,7 +25,7 @@ window.onload = function(){
 			console.log("Error!! Your guess has to be an integer...");
 			message = [false, "Error!! Your guess has to be an integer..."];
 		}
-		else if(number < 0 || number > 100){
+		else if(number <= 1 || number > 100){
 			message = [false, "Error!! Guess a number greater than 0 and lower than 100..."];
 		}
 		else{

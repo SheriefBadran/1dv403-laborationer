@@ -1,6 +1,11 @@
 {
 	"folders":
 	[
-		
+		{
+			"path": "json"
+		},
+		{
+			"path": "js"
+		}
 	]
 }
