@@ -3,17 +3,35 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>JavaScript - Labbymezzage</title>
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/foundation.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
 </head>
     <body>
-        
-        <h1>Labbymezzage!</h1>
-        <a href="../index.html"><--- Tillbaka</a>
-        <form>
-          <input type="text" id="message" /> <input id="send" type="submit" value="submit" />
-          <p id="value"></p>
-        </form>
-        <script data-main="js/main.js" src="js/require.js"></script>
-    	  <!-- // <script src="message.js"></script> -->
+        <main class="row wrapper">
+            <h1>Labbymezzage!</h1>
+            <section class="large-12 columns">
+                <form>
+                    <div class="row">
+                        <section class="message large-12 columns">
+                            <p class="text columns">Hej</p>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <div id="messageInput" class="large-12 columns">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input class="large-12 columns" type="text" id="message" /> 
+                        <input id="send" type="submit" value="submit" />
+                        <p id="value"></p>
+                    </div>
+                </form>
+            </section>
+        </main>
+    	<!-- // <script src="message.js"></script> -->
         <!-- // <script src="controler.js"></script> -->
+        <script data-main="js/main.js" src="js/require.js"></script>
     </body>
 </html>

@@ -29,21 +29,14 @@ WEBAPP.namespace = function(ns_string)
 }
 
 // A MODULE TO EXPERIMENT
-WEBAPP.namespace('utilities.menues');
 
 // CREATES XMLHttpRequestObject AND MANAGE AJAX CALLS
 WEBAPP.namespace('xhr');
 
-// module that uses the xhr module to get menu values.
-// WEBAPP.namespace('retrieveMenuValues');
-
 // CREATES MAIN MENU, retrieves and prints menu values.
 WEBAPP.namespace('mainMenu');
 
-WEBAPP.namespace('fistSubMenu');
-
-// CREATES MENU, retrieve and print menu values
-WEBAPP.namespace('menu');
+WEBAPP.namespace('utilities.handleEvent');
 
 
 // AJAX MODULE
@@ -373,175 +366,6 @@ WEBAPP.xhr = (function()
 }());
 
 
-
-// var getTabMenu = WEBAPP.xhr;
-// getTabMenu.ajax({
-// 	url: "php/tab_menu_controler.php",
-// 	contentType: "application/x-www-form-urlencoded",
-// 	type: "POST",
-// 	async: true,
-// 	data: "mode=tabmenu&param1=value1&param2=value2",
-// 	success: function (xhr, response, status)
-//     {
-// 		if(xhr.responseText.indexOf("ERRNO") >= 0 || xhr.responseText.indexOf("error:") >= 0 || xhr.responseText.length == 0)
-// 		{
-// 			alert(xhr.responseText.length == 0 ? "Server error." : response);
-// 		}
-// 		else
-// 		{
-// 			// console.log(response.menu[0][0].menu_name);
-// 			for(i=0, max=response.menu[0].length; i<max; i++)
-// 			{
-// 				console.log(response.menu[0][i].menu_name);
-// 			}
-// 		}
-// 	},
-// 	complete: function (xhr, status)
-// 	{
-// 		console.log("Ajax Call is completed!");
-// 	},
-// 	showErrors: true,
-// 	error: function(xhr, statusText, typeError)
-// 	{
-// 		// when set to true, display detailed error messages
-// 		var debugMode = true;
-// 
-// 		// display error message, with more technical details if debugMode is true
-// 		// for documentation, remember that all errorinfo is accessible in xhr.responseText
-// 		alert("Error accessing the server! " + (debugMode ? xhr.status + " " + statusText + "\r\n" + typeError: ""));
-// 	}
-// });
-
-// WEBAPP.retrieveMenuValues = (function()
-// {
-// 	// private properties
-// 	var settings =
-// 	{
-// 		phpURL: function(obj)
-// 		{
-// 			var menuURL = "php/tab_menu_controler.php";
-// 			if(obj.phpURL)
-// 			{
-// 				menuURL = obj.phpURL;
-// 			}
-// 			return menuURL;
-// 		},
-// 		
-// 		menuContentType: function(obj)
-// 		{
-// 			var ajaxMenuContentType = "application/x-www-form-urlencoded";
-// 			if(obj.menuContentType)
-// 			{
-// 				ajaxMenuContentType = obj.menuContentType;
-// 			}
-// 			return ajaxMenuContentType;
-// 		},
-// 		
-// 		phpType: function(obj)
-// 		{
-// 			var phpSuperGlobal = "GET";
-// 			if(obj.phpType)
-// 			{
-// 				phpSuperGlobal = obj.phpType;
-// 			}
-// 			return phpSuperGlobal;
-// 		},
-// 		
-// 		dataToPHP: function(obj)
-// 		{
-// 			var menuData = null;
-// 			if(obj.dataToPHP)
-// 			{
-// 				menuData = obj.dataToPHP;
-// 			}
-// 			return menuData;
-// 		},
-// 		
-// 		getMenuSuccess: function(obj)
-// 		{
-// 			var menuSuccess;
-// 			if(obj.getMenuSuccess)
-// 			{
-// 				menuSuccess = obj.getMenuSuccess;
-// 			}
-// 			return menuSuccess;
-// 		},
-// 		
-// 		getMenuComplete: function(obj)
-// 		{
-// 			var menuComplete;
-// 			if(obj.getMenuComplete)
-// 			{
-// 				menuComplete = obj.getMenuComplete;
-// 			}
-// 			return menuComplete;
-// 		},
-// 		
-// 		menuAsync: function(obj)
-// 		{
-// 			var ajaxMenuAsync = true;
-// 			if(obj.menuAsync)
-// 			{
-// 				ajaxMenuAsync = obj.menuAsync;
-// 			}
-// 			return ajaxMenuAsync;
-// 		},
-// 		
-// 		showMenuErrors: function(obj)
-// 		{
-// 			var showAjaxMenuErrors = true;
-// 			if(obj.showMenuErrors)
-// 			{
-// 				showAjaxMenuErrors = obj.showMenuErrors;
-// 			}
-// 			return showAjaxMenuErrors;
-// 		},
-// 		
-// 		menuErrors: function(obj)
-// 		{
-// 			var ajaxMenuError;
-// 			if(obj.menuErrors)
-// 			{
-// 				ajaxMenuErrors = obj.menuErrors;
-// 			}
-// 			return ajaxMenuErrors;
-// 		}
-// 	};
-// 	
-// 	return{
-// 		getMenuValues: function(args)
-// 		{
-// 			var menuSettings =
-// 			{
-// 				phpURL: settings.phpURL(args),
-// 				menuContentType: settings.menuContentType(args),
-// 				phpType: settings.phpType(args),
-// 				dataToPHP: settings.dataToPHP(args),
-// 				getMenuSuccess: settings.getMenuSuccess(args),
-// 				getMenuComplete: settings.getMenuComplete(args),
-// 				menuAsync: settings.menuAsync(args),
-// 				showMenuErrors: settings.showMenuErrors(args),
-// 				menuErrors: settings.menuErrors(args)
-// 			};
-// 			
-// 			// dependencies
-// 			var getValues = WEBAPP.xhr;
-// 			getValues.ajax({
-// 				url: menuSettings.phpURL,
-// 				contentType: menuSettings.menuContentType,
-// 				type: menuSettings.phpType,
-// 				async: menuSettings.menuAsync,
-// 				data: menuSettings.dataToPHP,
-// 				success: menuSettings.getMenuSuccess,
-// 				complete: menuSettings.getMenuComplete,
-// 				showErrors: menuSettings.showMenuErrors,
-// 				error: menuSettings.menuErrors
-// 			});
-// 		}
-// 	};
-// }());
-
-
 WEBAPP.mainMenu = (function()
 {
 	// private properties
@@ -659,246 +483,124 @@ WEBAPP.mainMenu = (function()
 		}
 	};
 }());
-// TESTING MODULE WEBAPP.mainMenu
-// var mainMenu = WEBAPP.mainMenu;
-// mainMenu.createMainMenu({
-// 	menuURL: "php/tab_menu_controler.php",
-// 	menuMode: "mode=tabmenu"
-// 	});
 
-WEBAPP.fistSubMenu = (function(){
-	var settings =
-	{
-		menuURL: function(obj)
-		{
-			var url = "php/tab_menu_controler.php";
-			if(obj.menuURL)
-			{
-				url = obj.menuURL;
+WEBAPP.utilities.handleEvent = (function(){
+	
+	// private properties
+	var settings = {
+		element: function(obj){
+			var el;
+			if(typeof obj.element === "object"){
+				el = obj.element;
 			}
-			return url;
+			return el;
 		},
 		
-		menuMode: function(obj)
-		{
-			var mode = "mode=tabmenu";
-			if(obj.mode)
-			{
-				mode = obj.mode;
+		eventType: function(obj){
+			var evType;
+			if(typeof obj.eventType === "string"){
+				evType = obj.eventType;
 			}
-			return mode;
+			return evType;
 		},
-		
-		domPlace: function(obj)
-		{
-			var dom;
-			if(obj.dom)
-			{
-				dom = obj.dom;
-			}
-			return dom;
-		}
-	};
-}());
 
-WEBAPP.menu = (function()
-{
-	// private propeties
-	var settings =
-	{
-		subMenuLevel: function(obj)
-		{
-			// default value
-			var levelNr = "firstSubMenu";
-			// if value is given
-			if(obj.subMenuLevel)
-			{
-				levelNr = obj.subMenuLevel;
+		filterOut: function(obj){
+			var filter = null;
+			if(typeof obj.filterOut === "function"){
+				filter = obj.filterOut;
 			}
-			return levelNr;
+			return filter;
+		},
+
+		init: function(obj){
+			var init = null;
+			if(typeof obj.init === "object"){
+				init = obj.init;
+			}
+			return init;
 		},
 		
-		firstSubEventType: function(obj)
-		{
-			var firstEventType = "fadeIn"
-			if(obj.firstSubEventType)
-			{
-				firstEventType = obj.firstSubEventType;
+		worker: function(obj){
+			var worker;
+			if(typeof obj.worker === "function"){
+				worker = obj.worker;
 			}
-			return firstEventType;
+			return worker;
 		},
-		
-		secondSubEventType: function(obj)
-		{
-			var secondEventType = "fadeIn"
-			if(obj.secondSubEventType)
-			{
-				secondEventType = obj.secondSubEventType;
+
+		useCapture: function(obj){
+			var capture = false;
+			if(typeof obj.useCapture === "boolean"){
+				capture = obj.useCapture;
 			}
-			return secondEventType;
+			return capture;
 		},
-		
-		firstSubEventTime: function(obj)
-		{
-			var firstEventTime = 400;
-			if(obj.firstSubEventTime)
-			{
-				firstEventTime = obj.firstSubEventTime;
+
+		preventDefault: function(obj){
+			var preventDefault = false;
+			if(typeof obj.preventDefault === "boolean"){
+				preventDefault = obj.preventDefault;
 			}
-			return firstEventTime;
-		},
-		
-		secondSubEventTime: function(obj)
-		{
-			var secondEventTime = 400;
-			if(obj.secondSubEventTime)
-			{
-				secondEventTime = obj.secondSubEventTime;
-			}
-			return secondEventTime;
-		},
-		
-		secondSubAway: function(obj)
-		{
-			var secondAway = "fadeOut";
-			if(obj.secondSubAway)
-			{
-				secondAway = obj.secondSubAway;
-			}
-			return secondAway;
-		},
-		
-		secondSubAwayTime: function(obj)
-		{
-			var awayTime = 0;
-			if(obj.secondSubAwayTime)
-			{
-				awayTime = obj.secondSubAwayTime;
-			}
-			return awayTime;
+			return preventDefault;
 		}
 	},
-	
-	ajaxFunctions =
-	{
-		getMenuValues: function(callback)
-		{
-			var menuValues = WEBAPP.xhr;
-			console.log(typeof menuValues.ajax);
-			
-			menuValues.ajax({
-				url: "php/tab_menu_controler.php",
-				contentType: "application/x-www-form-urlencoded",
-				type: "POST",
-				async: true,
-				data: "mode=tabmenu",
-				success: function (xhr, response, status)
-			    {
-					if(xhr.responseText.indexOf("ERRNO") >= 0 || xhr.responseText.indexOf("error:") >= 0 || xhr.responseText.length == 0)
-					{
-						alert(xhr.responseText.length == 0 ? "Server error." : response);
-					}
-					else
-					{
-						callback();
-					}
-				},
-				complete: function (xhr, status)
-				{
-					console.log("Ajax Call is completed!");
-				},
-				showErrors: true,
-				error: function(xhr, statusText, typeError)
-				{
-					// when set to true, display detailed error messages
-					var debugMode = true;
-		
-					// display error message, with more technical details if debugMode is true
-					// for documentation, remember that all errorinfo is accessible in xhr.responseText
-					alert("Error accessing the server! " + (debugMode ? xhr.status + " " + statusText + "\r\n" + typeError: ""));
+
+	eventFunc = {
+		callback: function(element, eventType, filterOut, worker, init, useCapture, preventDefault){
+
+			if(document.addEventListener){
+				element.addEventListener(eventType, workOnEvent, useCapture);
+			}
+
+			function workOnEvent(e){
+				var src, parts;
+
+				// get event and source element
+				e = e || window.event;
+				var target = (typeof e.target !== "undefined") ? e.target : e.srcElement;
+
+				// Filter out clicks of no interest.
+				filterOut(target);
+
+				// call worker to do actual work on click event, pass init object (that sets main tasks).
+				if(init !== null){
+					worker(init);
 				}
-			});
-		},
-		
-		getSubMenuValues: function(callback, ID)
-		{
-			var subMenuValues = WEBAPP.xhr;
-			console.log(typeof menuValues.ajax);
-			
-			subMenuValues.ajax({
-				url: "php/tab_menu_controler.php",
-				contentType: "application/x-www-form-urlencoded",
-				type: "POST",
-				async: true,
-				data: "mode=tabmenu&id=" + ID,
-				success: function (xhr, response, status)
-			    {
-					if(xhr.responseText.indexOf("ERRNO") >= 0 || xhr.responseText.indexOf("error:") >= 0 || xhr.responseText.length == 0)
-					{
-						alert(xhr.responseText.length == 0 ? "Server error." : response);
-					}
-					else
-					{
-						callback();
-					}
-				},
-				complete: function (xhr, status)
-				{
-					console.log("Ajax Call is completed!");
-				},
-				showErrors: true,
-				error: function(xhr, statusText, typeError)
-				{
-					// when set to true, display detailed error messages
-					var debugMode = true;
-		
-					// display error message, with more technical details if debugMode is true
-					// for documentation, remember that all errorinfo is accessible in xhr.responseText
-					alert("Error accessing the server! " + (debugMode ? xhr.status + " " + statusText + "\r\n" + typeError: ""));
+				else{
+				worker();
 				}
-			});
+
+				// prevent form from sending to server, everything is handled on the client.
+				if(preventDefault === true && typeof e.preventDefault === "function"){
+					e.preventDefault();
+				}
+			};
 		}
 	};
 	
+	// facade and public API
 	return{
-		createMenu: function(args)
-		{
-			// dependencies
-			// var getValues = WEBAPP.xhr;
-			// console.log(getValues);
-			ajaxFunctions.getMenuValues(function(){
-				// console.log(response.menu[0][0].menu_name);
-				// exchange code below for a callback.
-				for(var i=0, max=response.menu[0].length; i<max; i++)
-				{	
-					// compose the HTML code that displays the menu
-					var htmlMenu = "",
-					displayTabMenu = document.getElementById("unitList");
-
-					htmlMenu += "<li>";
-					htmlMenu += "<a href=\"#\"" + "id=" + "\"" + response.menu[0][i].id + "\"" + " class=\"item\"" + ">";
-					htmlMenu += response.menu[0][i].menu_name;
-					htmlMenu += "</a>";
-					htmlMenu += "</li>";
-
-					// display the menu
-					displayTabMenu.innerHTML += htmlMenu;	
-				}
-			});
-			console.log(settings.subMenuLevel(args));
-			console.log(settings.firstSubEventType(args));
+		handler: function(args){
+			var handlerSettings = {
+				element: settings.element(args),
+				eventType: settings.eventType(args),
+				filterOut: settings.filterOut(args),
+				init: settings.init(args),
+				worker: settings.worker(args),
+				useCapture: settings.useCapture(args),
+				preventDefault: settings.preventDefault(args)
+			};
 			
-			
+
+			var element = handlerSettings.element,
+			eventType = handlerSettings.eventType,
+			filterOut = handlerSettings.filterOut,
+			worker = handlerSettings.worker,
+			init = handlerSettings.init,
+			useCapture = handlerSettings.useCapture,
+			preventDefault = handlerSettings.preventDefault;
+
+			eventFunc.callback(element, eventType, filterOut, worker, init, useCapture, preventDefault);
 		}
 	};
 }());
-// var menu = WEBAPP.menu;
-// menu.createMenu({
-// 	subMenuLevel: "firstSubMenu",
-// 	firstSubEventType: "fadeIn",
-// 	secondSubEventType: "fadeIn",
-// 	firstSubEventTime: 400,
-// 	secondSubEventTime: 400,
-// 	secondSubAway: "fadeOut",
-// 	secondSubAwayTime: 0
-// });
