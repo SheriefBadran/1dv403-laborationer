@@ -9,25 +9,38 @@
 </head>
     <body>
         <main class="row wrapper">
+
             <h1>Labbymezzage!</h1>
-            <section class="large-12 columns">
-                <form>
+
+            <section class="large-12 columns" id="formWrapper">
+
+                <form id="messageForm">
+                    <section id="messageSection" class="row">
+                        <!-- MESSAGE PLACEHOLDER -->
+                   <!-- <section class="row">
+                            <div class="message small-6 small-centered columns">
+                                <p class="text columns">Hej</p>
+                            </div>
+                        </section> -->
+                    </section>
+
+                    <section id="counter">
+                        <p> <!-- COUNTER PLACEHOLDER --> </p>
+                    </section>
+
                     <div class="row">
-                        <section class="message large-12 columns">
-                            <p class="text columns">Hej</p>
-                        </section>
-                    </div>
-                    <div class="row">
-                        <div id="messageInput" class="large-12 columns">
-                            <textarea></textarea>
+                        <div id="messageInput" class="small-7 small-centered columns">
+                            <textarea id="message"></textarea>
                         </div>
                     </div>
+
                     <div class="row">
-                        <input class="large-12 columns" type="text" id="message" /> 
-                        <input id="send" type="submit" value="submit" />
+                        <input id="send" type="submit" value="Skriv" />
                         <p id="value"></p>
                     </div>
+
                 </form>
+
             </section>
         </main>
     	<!-- // <script src="message.js"></script> -->

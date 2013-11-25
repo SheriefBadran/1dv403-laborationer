@@ -19,7 +19,7 @@ requirejs(files, function(webapp, message, dom){
 	console.log(Message);
 
 	console.log(dom);
-	var elements = dom.getElements();
+	//var elements = dom.getElementFrag();
 	console.log(LABBY);
 	console.log(WEBAPP);
 
@@ -46,15 +46,22 @@ requirejs(files, function(webapp, message, dom){
 		// Worker does actual work on click event, init-obj is passed as argument from the WEBAPP module (that sets main tasks).
 		worker: function(init, e){
 
+			// variables for worker function
+			var input = document.querySelector("#message").value,
+			messageHandler, 
+			text, 
+			index = init.index;
+
+			// Increment index to retrieve correct values
 			init.index++;
 
-			var messageHandler = init.messageHandler;
-			messageHandler.setMessage({text: "message", date: new Date()});
+			messageHandler = init.messageHandler;
+			messageHandler.setMessage({text: input, date: new Date()});
 
-			var message = messageHandler.getMessage(init.index).text,
+			text = messageHandler.getMessage(init.index).text,
 			date = messageHandler.getMessage(init.index).date;
 
-			printMessage(message, date);
+			printMessage(text, date, init.index);
 			// console.log(init.messageHandler);
 			// console.log("main work");
 		},
@@ -64,7 +71,11 @@ requirejs(files, function(webapp, message, dom){
 		preventDefault: true
 	});
 
-	var printMessage = function(message, date){
-		
+	var printMessage = function(text, date, index){
+		var frag = dom.getElementFrag(text, date);
+		var messageSection = document.querySelector('#messageSection');
+
+		messageSection.appendChild(frag);
+		console.log(index + 1);
 	}
 });

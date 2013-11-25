@@ -1,30 +1,25 @@
 define(["mod/dom"],function(){
 	return{
-		getElements: function(){
-			var doc = document, div, section, p,
+		getElementFrag: function(text, date){
+
+			var doc = document, section, div, p, t, d,
 			frag = doc.createDocumentFragment();
 
-			div = doc.createElement('div');
 			section = doc.createElement('section');
+			div = doc.createElement('div');
 			p = doc.createElement('p');
+			t = doc.createTextNode(text);
 
-			div.className = 'row';
-			section.className = 'message large-12 columns';
+			section.className = 'row';
+			div.className = 'message small-6 small-centered columns';
 			p.className = 'text columns';
 
-			div.appendChild(section);
-			section.appendChild(p);
+			section.appendChild(div);
+			div.appendChild(p);
+			p.appendChild(t);
+			frag.appendChild(section);
 
-
-
-
-
-
-			return{
-				p: p,
-				input: input,
-				submit: submit
-			};
+			return frag;
 		},
 		createElements: function(){
 			// implement
