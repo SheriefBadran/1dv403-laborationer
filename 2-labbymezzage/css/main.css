@@ -7,13 +7,30 @@ WRAPPER-COLORS
 #A9F16C
 */
 
+h1{
+	text-align: center;
+}
+
 .wrapper{
 	background-color: #66A1D2;
 }
 
 .message{
 	background-color: #A9F16C;
-	min-height: 40px;
+
 	margin: 0px 0px 10px 0px;
 	border: 1px solid #000;
+}
+
+.message p{
+	float: none;
+}
+
+#counter{
+	float: right;
+	margin-top: 20px;
+}
+
+.clear{
+	clear: both;
 }

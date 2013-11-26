@@ -559,12 +559,15 @@ WEBAPP.utilities.handleEvent = (function(){
 				e = e || window.event;
 				var target = (typeof e.target !== "undefined") ? e.target : e.srcElement;
 
+				console.log(target);
 				// Filter out clicks of no interest.
-				filterOut(target);
+				// if(filterOut(target)){
+				// 	return;
+				// }
 
 				// call worker to do actual work on click event, pass init object (that sets main tasks).
 				if(init !== null){
-					worker(init);
+					worker(init, target);
 				}
 				else{
 				worker();

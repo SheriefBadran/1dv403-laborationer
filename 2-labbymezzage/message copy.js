@@ -1,6 +1,5 @@
 var LABBY = LABBY || {};
 
-// namespace functionality taken from the book javascript patterns.
 LABBY.namespace = function(ns_string)
 {
 	var parts = ns_string.split('.'),
@@ -48,59 +47,52 @@ LABBY.mezzage.Message = (function()
 	
 	// PUBLIC API
 		
-	Message = function(message, date){
+	Message = function(messageObj){
+		var messages = [];
 
-		this.getText = function(){
-			return message;
+		this.setMessage = function(messageObj){
+			
+			if(typeof messageObj !== "object"){
+				throw { message: "Error! Argument has to be of type object"}
+			}
+
+			messages.push(messageObj);
 		};
 
-		this.setText = function(_text){
-			message = _text;
-		};
-
-		this.getDate = function(){
-			return date;
-		};
-
-		this.setDate = function(_date){
-			date = _date;
+		this.getMessage = function(index){
+			return messages[index];
 		};
 	};
 
 	// prototype object
 	Message.prototype = {
 		// Constructor Functions
-		toString: function(){
-			return this.getText()+" ("+this.getDate()+")";
-		},
-
-		getHTMLText: function(){
-
+		getVar1: function(){
+			return this.var1;
 		}
-
 	};
 
-	MessageStorage = function(){
+	Labby = function(messageRef){
 		var message = [];
 
 		this.storeMessage = function(messageRef){
 			message.push(messageRef);
 			//messageRef.setMessage(messageObj);
-		};
+		}
 
 		this.getMessage = function(index){
-			return message[index];
-		};
+			
+		}
 
 
 	};
 
-	MessageStorage.prototype = {
+	Labby.prototype = {
 		deleteMessage: function(){
-
+			
 		}
 	}
 
 	// return the constructor to be assigned to the new namespace
-	return { Message: Message, MessageStorage: MessageStorage };
+	return { Message: Message, Labby: Labby };
 }());
