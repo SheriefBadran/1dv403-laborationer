@@ -567,10 +567,10 @@ WEBAPP.utilities.handleEvent = (function(){
 
 				// call worker to do actual work on click event, pass init object (that sets main tasks).
 				if(init !== null){
-					worker(init, target);
+					worker(target, init, e);
 				}
 				else{
-				worker();
+					worker(target, e);
 				}
 
 				// prevent form from sending to server, everything is handled on the client.

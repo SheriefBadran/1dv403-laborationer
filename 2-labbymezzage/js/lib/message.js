@@ -1,4 +1,13 @@
+'use strict';
+
+// Default initialization of LABBY
 var LABBY = LABBY || {};
+
+// Initialization adapted for jshint
+// var LABBY = {};
+
+// !! jshint STOPS COMPLAINING IF LABBY GLOBAL IS DELETED FROM jshint's JSON CONFIG FILE IN
+//(node_modules/grunt-contrib-jshint) !!
 
 // namespace functionality taken from the book javascript patterns.
 LABBY.namespace = function(ns_string)
@@ -21,10 +30,10 @@ LABBY.namespace = function(ns_string)
 		parent = parent[parts[i]];
 	}
 	return parent;
-}
+};
 
 // Define namespace for Message module
-LABBY.namespace('mezzage.Message');
+LABBY.namespace('Chat');
 
 // MESSAGE MODULE
 /**
@@ -37,7 +46,7 @@ LABBY.namespace('mezzage.Message');
  * []
  */
 
-LABBY.mezzage.Message = (function()
+LABBY.Chat = (function()
 {
 	// dependencies: none
 	
@@ -48,7 +57,7 @@ LABBY.mezzage.Message = (function()
 	
 	// PUBLIC API
 		
-	Message = function(message, date){
+	var Message = function(message, date){
 
 		this.getText = function(){
 			return message;
@@ -80,26 +89,72 @@ LABBY.mezzage.Message = (function()
 
 	};
 
-	MessageStorage = function(){
-		var message = [];
+	var MessageStorage = function(){
+		var messages = [];
+		var fragments = [];
 
 		this.storeMessage = function(messageRef){
-			message.push(messageRef);
+			messages.push(messageRef);
 			//messageRef.setMessage(messageObj);
 		};
 
 		this.getMessage = function(index){
-			return message[index];
+			return messages[index];
 		};
 
+		this.getAllMessages = function(){
+			return messages;
+		};
 
+		this.getFragments = function(){
+			return fragments;
+		};
 	};
 
 	MessageStorage.prototype = {
-		deleteMessage: function(){
+		RenderMessage: function(messageID){
+			var doc = document, section, div, spanEdit, spanDelete, spanDate, p, spanTime,
+			frag = doc.createDocumentFragment();
 
+			section = doc.createElement('section');
+			div = doc.createElement('div');
+			spanEdit = doc.createElement('span');
+			spanDelete = doc.createElement('span');
+			spanDate = doc.createElement('span');
+			p = doc.createElement('p');
+			p.innerHTML = this.getMessage(messageID);
+			spanTime = doc.createElement('span');
+			//t = doc.createTextNode(text);
+
+			section.className = 'row';
+			div.className = 'message small-6 small-centered columns';
+			div.id = messageID.toString();
+			p.className = 'text columns';
+
+
+
+			section.appendChild(div);
+			div.appendChild(spanEdit);
+			div.appendChild(spanDelete);
+			div.appendChild(spanDate);
+			div.appendChild(p);
+			div.appendChild(spanTime);
+			//p.appendChild(t);
+			frag.appendChild(section);
+			return frag;
+		},
+
+		RenderMessages: function(){
+
+			var messageObjects = this.getAllMessages();
+
+			for (var i = 0, max = messageObjects.length; i < max; i++) {
+				this.getFragments()[i] = this.RenderMessage(i);
+			}
+
+			return this.getFragments();
 		}
-	}
+	};
 
 	// return the constructor to be assigned to the new namespace
 	return { Message: Message, MessageStorage: MessageStorage };

@@ -1,3 +1,5 @@
+'use strict';
+
 requirejs.config({
 	baseUrl: 'js/lib',
 	paths: {
@@ -15,102 +17,117 @@ requirejs.config({
 var files = ["WEBAPP", "message", "mod/dom"];
 
 requirejs(files, function(webapp, message, dom){
-	var counterBoxSection = document.querySelector("#counter");
-	console.log(Message);
-	console.log(MessageStorage);
-	console.log(dom);
-	console.log(WEBAPP);
 
-	var storage = new MessageStorage();
+	// - MODULE INITIALIZATIONS -
+	// Retrieve module constructors from namespace LABBY.Chat.
+	var Message = LABBY.Chat.Message;
+	var MessageStorage = LABBY.Chat.MessageStorage;
 
-	storage.storeMessage(new Message("meddelande", new Date()));
-	var ref = storage.getMessage(0);
-	console.log(ref.getDate());
-	console.log(storage.getMessage(0).getText());
-
-	//printMessage();
+	// Retrieve handleEvent module from namespace WEBAPP.utilities.
 	var handleEvent = WEBAPP.utilities.handleEvent;
 
+	// - INSTANTIATIONS -
+	// Instantiate the MessageStorage constructor.
+	var storage = new MessageStorage();
+
+	// - DOM QUERIES -
+	// Retrieve element for attached event listener.
+	var listenerAttachElement = document.querySelector(".wrapper");
+
+	// Retrieve the counter's parent element (section tag).
+	var counterBoxSection = document.querySelector("#counter");
+
+	// Retrieve message input form field.
+	var input = document.querySelector("#message");
+
+	// Retrieve section element that holds a message.
+	var messageSection = document.querySelector('#messageSection');
+
+	// - CREATE DOM -
+	// Create text node for message counter.
+	var counterData = document.createTextNode("Antal Meddelanden: 0");
+
+	// Append counterdata to DOM tree.
+	counterBoxSection.appendChild(counterData);
+
+
+	// - TEST BLOCK -
+	// console.log(Message);
+	// console.log(MessageStorage);
+	// console.log(dom);
+	// console.log(WEBAPP);
+
+	// var storage = new MessageStorage();
+
+	// storage.storeMessage(new Message("meddelande", new Date()));
+	// storage.storeMessage(new Message("Hej.", new Date()));
+	// storage.storeMessage(new Message("Hur mår du?", new Date()));
+	// storage.storeMessage(new Message("Jag mår bra.", new Date()));
+	// storage.storeMessage(new Message("Programmerar du?", new Date()));
+	// var ref = storage.getMessage(0);
+	// console.log(ref.getDate());
+	// console.log(storage.getMessage(0).getText());
+	// console.log(storage.getAllMessages());
+	// console.log(storage.RenderMessage(4));
+	// console.log(storage.RenderMessages());
+
+	// - END TEST BLOCK -
+
+
+
 	// Call the event deligation module.
-	// handleEvent.handler({
-	// 	element: document.querySelector(".wrapper"),
+	handleEvent.handler({
+		element: listenerAttachElement,
 
-	// 	eventType: "click",
+		eventType: "click",
 
-	// 	filterOut: function(target){
-	// 		if(target.id !== "send"){
-	// 			return true;
-	// 		}
-	// 		else{
-	// 			return false;
-	// 		}
-	// 	},
-	// 	// Immediate function set init with an initialization object
-	// 	init: (function(){
-	// 		return {
-	// 			messageHandler: new Message(),
-	// 			index: -1
-	// 		};
-	// 	}()),
+		filterOut: function(target){
+			if(target.id !== "send"){
+				return true;
+			}
+			else{
+				return false;
+			}
+		},
+		// Immediate function set init with an initialization object
+		init: (function(){
+			return {
+				index: -1
+			};
+		}()),
 
-	// 	// Worker does actual work on click event, init-obj is passed as argument from the WEBAPP module (that sets main tasks).
-	// 	worker: function(init, target, e){
-	// 		//WHEN MANY CLICK-EVENTS, LET THE MODULE SEND WORKER INFO ON WHAT IS CLICKED AND WHICH
-	// 		//FUNCTIONS TO CALL.
-	// 		if(target.id === "send"){
-	// 			printMessage(init);
-	// 		}
+		// Worker does actual work on click event, init-obj is passed as argument from the WEBAPP module (that sets main tasks).
+		worker: function(target, init, e){
+			//WHEN MANY CLICK-EVENTS, LET THE MODULE SEND WORKER INFO ON WHAT IS CLICKED AND WHICH
+			//FUNCTIONS TO CALL.
+			if(target.id === "send"){
+				printMessage(init);
+			}
 
-	// 	},
+		},
 
-	// 	useCapture: false,
+		useCapture: false,
 
-	// 	preventDefault: true
-	// });
+		preventDefault: true
+	});
 
-	// var printMessage = function(init){
-	// 	// variables for worker function
-	// 	var input = document.querySelector("#message").value,
-	// 	messageHandler, 
-	// 	text, 
-	// 	index = init.index;
+	var printMessage = function(init){
+		// variables for worker function
+		var frag,
+		index = init.index;
 
-	// 	// Increment index to retrieve correct values
-	// 	init.index++;
+		// Increment index to retrieve correct values
+		init.index++;
 
-	// 	messageHandler = init.messageHandler;
-	// 	// if(init.index === 0){
-	// 	// 	printMessage();
-	// 	// }
+		// Create a new Message reference/object and sore it in the MessageStorage class.
+		storage.storeMessage(new Message(input.value, new Date()));
 
-	// 	// GIVE THE MESSAGE OBJECT AN ID-PROPERTY!!!!!!!!!!!!(MAYBE INSERT IT TO HTML CODE)
-	// 	// ALSO INVESTIGATE THE "e" AND TARGET IN EVENTHANDLER AND WORKER.
-	// 	// PASS TARGET AS ARGUMENT FROM WEBAPP TO WORKER!!
-	// 	messageHandler.setMessage({text: input, date: new Date()});
+		frag = storage.RenderMessage(init.index);
+		messageSection.appendChild(frag);
+		input.value = "";
 
-	// 	text = messageHandler.getMessage(init.index).text,
-	// 	date = messageHandler.getMessage(init.index).date;
-
-
-	// 	var frag = dom.getElementFrag(text, date);
-	// 	var messageSection = document.querySelector('#messageSection');
-
-	// 	messageSection.appendChild(frag);
-
-	// 	//var counterBox = counterBoxSection.getElementsByTagName('p');
-	// 	var counterData = document.createTextNode("Antal Meddelanden: " + (index + 1).toString());
-	// 	counterBoxSection.innerHTML = "";
-	// 	counterBoxSection.appendChild(counterData);
-	// 	console.log(counterBoxSection);
-	// 	console.log(counterData);
-
-	// 	// RETURN LATEST INDEX VALUE TO WORKER !!
-	// 	//console.log(test);
-	// };
-
-	// Initialization and Setup for function printMessage
-	// (function(){
-	// 	printMessage();
-	// })();
-
+		// Replace and update counter data.
+		counterData.nodeValue = "Antal meddelanden: " + (init.index + 1).toString();
+		counterBoxSection.appendChild(counterData);
+	};
 });
