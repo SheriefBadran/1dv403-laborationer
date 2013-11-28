@@ -18,9 +18,6 @@ var files = ["WEBAPP", "message", "mod/dom"];
 
 requirejs(files, function(webapp, message, dom){
 
-	// - INITIALIZE WINDOW OBJECTS -
-	// var Confirm = window.confirm;
-
 	// - MODULE INITIALIZATIONS -
 	// Retrieve module constructors from namespace LABBY.Chat.
 	var Message = LABBY.Chat.Message;
