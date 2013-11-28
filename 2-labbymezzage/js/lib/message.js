@@ -84,7 +84,6 @@ LABBY.Chat = (function()
 
 	// prototype object
 	Message.prototype = {
-		// Constructor Functions
 		toString: function(){
 			return this.getText();
 		}
@@ -96,7 +95,6 @@ LABBY.Chat = (function()
 
 		this.storeMessage = function(messageRef){
 			messages.push(messageRef);
-			//messageRef.setMessage(messageObj);
 		};
 
 		this.getMessage = function(index){
@@ -137,8 +135,6 @@ LABBY.Chat = (function()
 			spanTime = doc.createElement('span');
 			spanTime.innerHTML = this.getMessage(messageID).getTime();
 			pTime = doc.createElement('p');
-			//t = doc.createTextNode(text);
-			console.log(this.getMessage(messageID).getTime());
 
 			section.className = "message large-8 large-centered columns";
 			section.id = messageID.toString();

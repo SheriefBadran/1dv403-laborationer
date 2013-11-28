@@ -19,7 +19,7 @@ var files = ["WEBAPP", "message", "mod/dom"];
 requirejs(files, function(webapp, message, dom){
 
 	// - INITIALIZE WINDOW OBJECTS -
-	var Confirm = window.confirm;
+	// var Confirm = window.confirm;
 
 	// - MODULE INITIALIZATIONS -
 	// Retrieve module constructors from namespace LABBY.Chat.
@@ -36,8 +36,11 @@ requirejs(files, function(webapp, message, dom){
 	// - DOM QUERIES -
 	var doc = document;
 
-	// Retrieve element for attached event listener.
-	var listenerAttachElement = doc.querySelector(".wrapper");
+	// Retrieve element for attached onclick events.
+	var attachedElementOnClick = doc.querySelector(".wrapper");
+
+	// Retrieve element for attchached keypress events. 
+	var attachedElementOnKeyPress = doc.querySelector("#messageInput")
 
 	// Retrieve the counter's parent element (section tag).
 	var counterBoxSection = doc.querySelector("#counter");
@@ -61,7 +64,7 @@ requirejs(files, function(webapp, message, dom){
 	// Call the event deligation module for clicks in the application.
 	// This event handler fires the followint function(s): printMessage, 
 	handleEvent.handler({
-		element: listenerAttachElement,
+		element: attachedElementOnClick,
 
 		eventType: "click",
 
@@ -75,40 +78,38 @@ requirejs(files, function(webapp, message, dom){
 		// Worker does actual work on click event, init-obj is passed as argument from the WEBAPP module (that sets main tasks).
 		// This event handler fires the following function(s): printMessage.
 		worker: function(target, e){
-			//WHEN MANY CLICK-EVENTS, LET THE MODULE SEND WORKER INFO ON WHAT IS CLICKED AND WHICH
-			//FUNCTIONS TO CALL.
+
+			// Count contains number of all message ref objects.
 			var count = storage.getAllMessages().length;
 
+			// If delete message is clicked.
 			if(target.className === "pdelete large-1 columns"){
 
-				//var conf = window.confirm;
-				if(!Confirm("Är du säker på att du vill radera meddelandet?")){
+				// Confirm delete
+				if(!confirm("Är du säker på att du vill radera meddelandet?")){
 					return;
 				}
 
 				deleteMessage(target, count);
 			}
 
+			// If calendar is clicked.
 			if(target.id === "calendar"){
 				alert(storage.getMessage(target.parentNode.parentNode.id).getDate());
 			}
 
+			// If message is sent.
 			if(target.id === "send"){
 				printMessage(count);
 			}
 		},
-
-		useCapture: false,
-
-		stopPropagation: true,
-
-		preventDefault: true
+		useCapture: false, stopPropagation: true, preventDefault: true
 	});
 
 	// Call the event deligation module for keypress in the application.
 	// This event handler fires the following function(s): printMessage.
 	handleEvent.handler({
-		element: document.querySelector("#messageInput"),
+		element: attachedElementOnKeyPress,
 
 		eventType: "keypress",
 
@@ -122,13 +123,9 @@ requirejs(files, function(webapp, message, dom){
 		worker: function(target, e){
 			var count = storage.getAllMessages().length;
 			printMessage(count);
-		},
 
-		useCapture: false,
-
-		stopPropagation: true,
-
-		preventDefault: true
+		}, 
+		useCapture: false, stopPropagation: true, preventDefault: true
 
 	});
 
@@ -164,5 +161,4 @@ requirejs(files, function(webapp, message, dom){
 		counterData.nodeValue = "Antal meddelanden: " + (count).toString();
 		counterBoxSection.appendChild(counterData);
 	};
-
 });
