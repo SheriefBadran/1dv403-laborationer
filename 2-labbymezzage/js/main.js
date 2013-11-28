@@ -18,6 +18,9 @@ var files = ["WEBAPP", "message", "mod/dom"];
 
 requirejs(files, function(webapp, message, dom){
 
+	// - INITIALIZE WINDOW OBJECTS -
+	var Confirm = window.confirm;
+
 	// - MODULE INITIALIZATIONS -
 	// Retrieve module constructors from namespace LABBY.Chat.
 	var Message = LABBY.Chat.Message;
@@ -53,7 +56,7 @@ requirejs(files, function(webapp, message, dom){
 
 	// Append counterdata to DOM tree.
 	counterBoxSection.appendChild(counterData);
-	
+
 
 	// Call the event deligation module for clicks in the application.
 	// This event handler fires the followint function(s): printMessage, 
@@ -77,25 +80,13 @@ requirejs(files, function(webapp, message, dom){
 			var count = storage.getAllMessages().length;
 
 			if(target.className === "pdelete large-1 columns"){
-				var conf = window.confirm;
-				if(!conf("Är du säker på att du vill radera meddelandet?")){
+
+				//var conf = window.confirm;
+				if(!Confirm("Är du säker på att du vill radera meddelandet?")){
 					return;
 				}
-				//alert("Är du säker på att du vill ta bort meddelandet?");
-				storage.deleteMessage(target.parentNode.parentNode.id);
 
-				messageSection.innerHTML = "";
-
-				var fragments = storage.RenderMessages();
-
-				fragments.forEach(function(fragment){
-					messageSection.appendChild(fragment);
-				});
-
-				count--;
-
-				counterData.nodeValue = "Antal meddelanden: " + (count).toString();
-				counterBoxSection.appendChild(counterData);
+				deleteMessage(target, count);
 			}
 
 			if(target.id === "calendar"){
@@ -156,4 +147,22 @@ requirejs(files, function(webapp, message, dom){
 		counterData.nodeValue = "Antal meddelanden: " + (count + 1).toString();
 		counterBoxSection.appendChild(counterData);
 	};
+
+	var deleteMessage = function(target, count){
+		storage.deleteMessage(target.parentNode.parentNode.id);
+
+		messageSection.innerHTML = "";
+
+		var fragments = storage.RenderMessages();
+
+		fragments.forEach(function(fragment){
+			messageSection.appendChild(fragment);
+		});
+
+		count--;
+
+		counterData.nodeValue = "Antal meddelanden: " + (count).toString();
+		counterBoxSection.appendChild(counterData);
+	};
+
 });
