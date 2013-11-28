@@ -59,6 +59,8 @@ LABBY.Chat = (function()
 		
 	var Message = function(message, date){
 
+		var date = new Date();
+
 		this.getText = function(){
 			return message;
 		};
@@ -74,19 +76,18 @@ LABBY.Chat = (function()
 		this.setDate = function(_date){
 			date = _date;
 		};
+
+		this.getTime = function(){
+			return date.toString().split(" ")[4];
+		};
 	};
 
 	// prototype object
 	Message.prototype = {
 		// Constructor Functions
 		toString: function(){
-			return this.getText()+" ("+this.getDate()+")";
-		},
-
-		getHTMLText: function(){
-
+			return this.getText();
 		}
-
 	};
 
 	var MessageStorage = function(){
@@ -109,38 +110,67 @@ LABBY.Chat = (function()
 		this.getFragments = function(){
 			return fragments;
 		};
+
+		this.deleteMessage = function(index){
+			messages.splice(index, 1);
+		}
 	};
 
 	MessageStorage.prototype = {
 		RenderMessage: function(messageID){
-			var doc = document, section, div, spanEdit, spanDelete, spanDate, p, spanTime,
+			var doc = document, section, divUpper, divMiddle, divLower, spanEdit, spanDelete, spanDate, spanTime, pMessage,
+			pEdit, pDelete, pDate, pTime,
 			frag = doc.createDocumentFragment();
 
 			section = doc.createElement('section');
-			div = doc.createElement('div');
+			divUpper = doc.createElement('div');
+			divMiddle = doc.createElement('div');
+			divLower = doc.createElement('div');
 			spanEdit = doc.createElement('span');
 			spanDelete = doc.createElement('span');
 			spanDate = doc.createElement('span');
-			p = doc.createElement('p');
-			p.innerHTML = this.getMessage(messageID);
+			pEdit = doc.createElement('p');
+			pDelete = doc.createElement('p');
+			pDate = doc.createElement('p');
+			pMessage = doc.createElement('p');
+			pMessage.innerHTML = this.getMessage(messageID);
 			spanTime = doc.createElement('span');
+			spanTime.innerHTML = this.getMessage(messageID).getTime();
+			pTime = doc.createElement('p');
 			//t = doc.createTextNode(text);
+			console.log(this.getMessage(messageID).getTime());
 
-			section.className = 'row';
-			div.className = 'message small-6 small-centered columns';
-			div.id = messageID.toString();
-			p.className = 'text columns';
+			section.className = "message large-8 large-centered columns";
+			section.id = messageID.toString();
+			divUpper.className = 'row';
+			divMiddle.className = 'row';
+			divLower.className = 'row';
+			spanEdit.className = "edit";
+			spanDelete.className = "delete";
+			spanDate.className = "date";
+			spanTime.className = "time";
+			pMessage.id = "pMessage";
+			pMessage.className = "large-12 columns";
+			pEdit.className = "pedit large-1 columns";
+			pDelete.className = "pdelete large-1 columns";
+			pDate.className = "pdate large-1 columns";
+			pDate.id = "calendar";
+			pTime.className = "ptime large-12 columns";
 
-
-
-			section.appendChild(div);
-			div.appendChild(spanEdit);
-			div.appendChild(spanDelete);
-			div.appendChild(spanDate);
-			div.appendChild(p);
-			div.appendChild(spanTime);
-			//p.appendChild(t);
+			pEdit.appendChild(spanEdit);
+			pDelete.appendChild(spanDelete);
+			pDate.appendChild(spanDate);
+			pTime.appendChild(spanTime);
+			divUpper.appendChild(pDate);
+			divUpper.appendChild(pEdit);
+			divUpper.appendChild(pDelete);
+			divMiddle.appendChild(pMessage);
+			divLower.appendChild(pTime);
+			section.appendChild(divUpper);
+			section.appendChild(divMiddle);
+			section.appendChild(divLower);
 			frag.appendChild(section);
+
 			return frag;
 		},
 

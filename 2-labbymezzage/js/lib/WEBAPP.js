@@ -536,6 +536,14 @@ WEBAPP.utilities.handleEvent = (function(){
 			return capture;
 		},
 
+		stopPropagation: function(obj){
+			var stopPropagation = false;
+			if(typeof obj.stopPropagation === "boolean"){
+				stopPropagation = obj.stopPropagation;
+			}
+			return stopPropagation;
+		},
+
 		preventDefault: function(obj){
 			var preventDefault = false;
 			if(typeof obj.preventDefault === "boolean"){
@@ -546,7 +554,7 @@ WEBAPP.utilities.handleEvent = (function(){
 	},
 
 	eventFunc = {
-		callback: function(element, eventType, filterOut, worker, init, useCapture, preventDefault){
+		callback: function(element, eventType, filterOut, worker, init, useCapture, stopPropagation, preventDefault){
 
 			if(document.addEventListener){
 				element.addEventListener(eventType, workOnEvent, useCapture);
@@ -559,11 +567,11 @@ WEBAPP.utilities.handleEvent = (function(){
 				e = e || window.event;
 				var target = (typeof e.target !== "undefined") ? e.target : e.srcElement;
 
-				console.log(target);
-				// Filter out clicks of no interest.
-				// if(filterOut(target)){
-				// 	return;
-				// }
+				//console.log(target);
+				// Filter out events of no interest.
+				if(typeof filterOut === "function" && filterOut(target, e)){
+					return;
+				}
 
 				// call worker to do actual work on click event, pass init object (that sets main tasks).
 				if(init !== null){
@@ -573,9 +581,25 @@ WEBAPP.utilities.handleEvent = (function(){
 					worker(target, e);
 				}
 
+				// Stop bubble.
+				if (stopPropagation === true && typeof e.stopPropagation === "function"){
+					e.stopPropagation();
+				}
+
+				// IE
+				if (stopPropagation === true && typeof e.cancelBubble !== "undefined"){
+					e.cancelBubble = true;
+				};
+
+
 				// prevent form from sending to server, everything is handled on the client.
 				if(preventDefault === true && typeof e.preventDefault === "function"){
 					e.preventDefault();
+				}
+
+				// IE.
+				if(preventDefault === true && typeof e.returnValue !== "undefined"){
+					e.returnValue = false;
 				}
 			};
 		}
@@ -591,6 +615,7 @@ WEBAPP.utilities.handleEvent = (function(){
 				init: settings.init(args),
 				worker: settings.worker(args),
 				useCapture: settings.useCapture(args),
+				stopPropagation: settings.stopPropagation(args),
 				preventDefault: settings.preventDefault(args)
 			};
 			
@@ -601,9 +626,10 @@ WEBAPP.utilities.handleEvent = (function(){
 			worker = handlerSettings.worker,
 			init = handlerSettings.init,
 			useCapture = handlerSettings.useCapture,
+			stopPropagation = handlerSettings.stopPropagation,
 			preventDefault = handlerSettings.preventDefault;
 
-			eventFunc.callback(element, eventType, filterOut, worker, init, useCapture, preventDefault);
+			eventFunc.callback(element, eventType, filterOut, worker, init, useCapture, stopPropagation, preventDefault);
 		}
 	};
 }());

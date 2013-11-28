@@ -31,103 +31,129 @@ requirejs(files, function(webapp, message, dom){
 	var storage = new MessageStorage();
 
 	// - DOM QUERIES -
+	var doc = document;
+
 	// Retrieve element for attached event listener.
-	var listenerAttachElement = document.querySelector(".wrapper");
+	var listenerAttachElement = doc.querySelector(".wrapper");
 
 	// Retrieve the counter's parent element (section tag).
-	var counterBoxSection = document.querySelector("#counter");
+	var counterBoxSection = doc.querySelector("#counter");
 
 	// Retrieve message input form field.
-	var input = document.querySelector("#message");
+	var input = doc.querySelector("#message");
 
 	// Retrieve section element that holds a message.
-	var messageSection = document.querySelector('#messageSection');
+	var messageSection = doc.querySelector('#messageSection');
 
 	// - CREATE DOM -
+
+	// - Create default counter data -
 	// Create text node for message counter.
-	var counterData = document.createTextNode("Antal Meddelanden: 0");
+	var counterData = doc.createTextNode("Antal Meddelanden: 0");
 
 	// Append counterdata to DOM tree.
 	counterBoxSection.appendChild(counterData);
+	
 
-
-	// - TEST BLOCK -
-	// console.log(Message);
-	// console.log(MessageStorage);
-	// console.log(dom);
-	// console.log(WEBAPP);
-
-	// var storage = new MessageStorage();
-
-	// storage.storeMessage(new Message("meddelande", new Date()));
-	// storage.storeMessage(new Message("Hej.", new Date()));
-	// storage.storeMessage(new Message("Hur mår du?", new Date()));
-	// storage.storeMessage(new Message("Jag mår bra.", new Date()));
-	// storage.storeMessage(new Message("Programmerar du?", new Date()));
-	// var ref = storage.getMessage(0);
-	// console.log(ref.getDate());
-	// console.log(storage.getMessage(0).getText());
-	// console.log(storage.getAllMessages());
-	// console.log(storage.RenderMessage(4));
-	// console.log(storage.RenderMessages());
-
-	// - END TEST BLOCK -
-
-
-
-	// Call the event deligation module.
+	// Call the event deligation module for clicks in the application.
+	// This event handler fires the followint function(s): printMessage, 
 	handleEvent.handler({
 		element: listenerAttachElement,
 
 		eventType: "click",
 
-		filterOut: function(target){
-			if(target.id !== "send"){
+		filterOut: function(target, e){
+			if(target.id === "pMessage"){
 				return true;
 			}
-			else{
-				return false;
-			}
+			return false;
 		},
-		// Immediate function set init with an initialization object
-		init: (function(){
-			return {
-				index: -1
-			};
-		}()),
 
 		// Worker does actual work on click event, init-obj is passed as argument from the WEBAPP module (that sets main tasks).
-		worker: function(target, init, e){
+		// This event handler fires the following function(s): printMessage.
+		worker: function(target, e){
 			//WHEN MANY CLICK-EVENTS, LET THE MODULE SEND WORKER INFO ON WHAT IS CLICKED AND WHICH
 			//FUNCTIONS TO CALL.
-			if(target.id === "send"){
-				printMessage(init);
+			var count = storage.getAllMessages().length;
+
+			if(target.className === "pdelete large-1 columns"){
+				var conf = window.confirm;
+				if(!conf("Är du säker på att du vill radera meddelandet?")){
+					return;
+				}
+				//alert("Är du säker på att du vill ta bort meddelandet?");
+				storage.deleteMessage(target.parentNode.parentNode.id);
+
+				messageSection.innerHTML = "";
+
+				var fragments = storage.RenderMessages();
+
+				fragments.forEach(function(fragment){
+					messageSection.appendChild(fragment);
+				});
+
+				count--;
+
+				counterData.nodeValue = "Antal meddelanden: " + (count).toString();
+				counterBoxSection.appendChild(counterData);
 			}
 
+			if(target.id === "calendar"){
+				alert(storage.getMessage(target.parentNode.parentNode.id).getDate());
+			}
+
+			if(target.id === "send"){
+				printMessage(count);
+			}
 		},
 
 		useCapture: false,
 
+		stopPropagation: true,
+
 		preventDefault: true
 	});
 
-	var printMessage = function(init){
-		// variables for worker function
-		var frag,
-		index = init.index;
+	// Call the event deligation module for keypress in the application.
+	// This event handler fires the following function(s): printMessage.
+	handleEvent.handler({
+		element: document.querySelector("#messageInput"),
 
-		// Increment index to retrieve correct values
-		init.index++;
+		eventType: "keypress",
+
+		filterOut: function(target, e){
+			if(e.keyCode !== 13){
+				return true;
+			}
+			return false;
+		},
+
+		worker: function(target, e){
+			var count = storage.getAllMessages().length;
+			printMessage(count);
+		},
+
+		useCapture: false,
+
+		stopPropagation: true,
+
+		preventDefault: true
+
+	});
+
+	var printMessage = function(count){
+		// variables for worker function
+		var frag;
 
 		// Create a new Message reference/object and sore it in the MessageStorage class.
 		storage.storeMessage(new Message(input.value, new Date()));
 
-		frag = storage.RenderMessage(init.index);
+		frag = storage.RenderMessage(count);
 		messageSection.appendChild(frag);
 		input.value = "";
 
 		// Replace and update counter data.
-		counterData.nodeValue = "Antal meddelanden: " + (init.index + 1).toString();
+		counterData.nodeValue = "Antal meddelanden: " + (count + 1).toString();
 		counterBoxSection.appendChild(counterData);
 	};
 });
