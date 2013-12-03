@@ -18,9 +18,15 @@ var files = ["WEBAPP", "observer/publisher", "mod/memory"];
 
 requirejs(files, function(webapp, observer, memory){
 
+	var doc = document;
+	var selectRowElement = doc.querySelector('#rows');
+	var selectColumnElement = doc.querySelector('#columns');
+
 	var rows;
 	var columns;
 
+	// makePublisher works together with the publisher module. The function takes an object and add on
+	// functionality that enables the object to become a publisher.
 	function makePublisher(o){
 		var prop;
 		for(prop in observer.publisher){
@@ -40,7 +46,7 @@ requirejs(files, function(webapp, observer, memory){
 
 	// create settings object for event handler
 	var rowEventObj = {
-		element: document.querySelector('#rows'),
+		element: selectRowElement,
 
 		eventType: "click",
 
@@ -53,9 +59,10 @@ requirejs(files, function(webapp, observer, memory){
 
 		worker: function(target, e){
 			if(!rows){
-				// publisher.publish(target.value);
 				rows = target.value;
 				var frag = memory.renderRows(rows);
+
+				// publish document fragment containing html for the rows. (memory.renderColumns subscribes).
 				publisher.publish(frag);
 			}
 		}, 
@@ -63,7 +70,7 @@ requirejs(files, function(webapp, observer, memory){
 	};
 
 	var columnEventObj = {
-		element: document.querySelector('#columns'),
+		element: selectColumnElement,
 
 		eventType: "click",
 
@@ -76,7 +83,6 @@ requirejs(files, function(webapp, observer, memory){
 
 		worker: function(target, e){
 			if(!columns && rows){
-				// publisher.publish(target.value);
 				columns = target.value;
 				memory.renderColumns(columns);
 			}
@@ -84,15 +90,13 @@ requirejs(files, function(webapp, observer, memory){
 		useCapture: false, stopPropagation: true, preventDefault: true
 	};
 
-	// make eventObj a publisher.
-	// makePublisher(rowEventObj);
+	// make columnEventObj a publisher.
 	makePublisher(columnEventObj);
 
-	// make memorytest a subscriber.
-	// publisher.subscribe(memory.renderRows);
+	// make memory.renderColumns a subscriber.
 	publisher.subscribe(memory.renderColumns);
 
-	// fire event.
+	// fire events.
 	handleEvent.handler(rowEventObj);
 	handleEvent.handler(columnEventObj);
 
