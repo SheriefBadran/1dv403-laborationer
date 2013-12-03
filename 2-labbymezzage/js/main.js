@@ -4,7 +4,7 @@ requirejs.config({
 	baseUrl: 'js/lib',
 	paths: {
 		mod: '../mod',
-		//message: 'message',
+		// message: 'message',
 		json: '../../json'
 	},
 	shim: {
@@ -37,7 +37,7 @@ requirejs(files, function(webapp, message, dom){
 	var attachedElementOnClick = doc.querySelector(".wrapper");
 
 	// Retrieve element for attchached keypress events. 
-	var attachedElementOnKeyPress = doc.querySelector("#messageInput")
+	var attachedElementOnKeyPress = doc.querySelector("#messageInput");
 
 	// Retrieve the counter's parent element (section tag).
 	var counterBoxSection = doc.querySelector("#counter");
@@ -119,7 +119,10 @@ requirejs(files, function(webapp, message, dom){
 
 		worker: function(target, e){
 			var count = storage.getAllMessages().length;
-			printMessage(count);
+			//printMessage(count);
+
+			console.log(Message);
+			dom.printMessages(doc, storage, Message, count, counterData);
 
 		}, 
 		useCapture: false, stopPropagation: true, preventDefault: true

@@ -21,7 +21,7 @@ LABBY.namespace = function(ns_string)
 		parts = parts.slice(1);
 	}
 	
-	for(i=0; i<parts.length; i+=1)
+	for(i=0; i<parts.length; i++)
 	{
 		if(typeof parent[parts[i]] === "undefined")
 		{

@@ -1,0 +1,479 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"counter",
+				"counterData"
+			],
+			[
+				"Message",
+				"Message"
+			],
+			[
+				"parent",
+				"parentNode"
+			],
+			[
+				"large",
+				"large-12"
+			],
+			[
+				"div",
+				"divMessageWrapper"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"Render",
+				"RenderMessages"
+			],
+			[
+				"message",
+				"messageID"
+			],
+			[
+				"cla",
+				"className"
+			],
+			[
+				"pD",
+				"pDelete"
+			],
+			[
+				"span",
+				"spanEdit"
+			],
+			[
+				"spanD",
+				"spanDate"
+			],
+			[
+				"stop",
+				"stopPropagation"
+			],
+			[
+				"RenderM",
+				"RenderMessage"
+			],
+			[
+				"messageObj",
+				"messageObject"
+			],
+			[
+				"spa",
+				"spanDelete"
+			],
+			[
+				"get",
+				"getText"
+			],
+			[
+				"messag",
+				"messageRef"
+			],
+			[
+				"first",
+				"firstChild"
+			],
+			[
+				"form",
+				"formWrapper"
+			],
+			[
+				"even",
+				"eventObj"
+			],
+			[
+				"wor",
+				"worker"
+			],
+			[
+				"work",
+				"workOnEvent"
+			],
+			[
+				"use",
+				"useCapture"
+			],
+			[
+				"filter",
+				"filterOut"
+			],
+			[
+				"hander",
+				"handlerSettings"
+			],
+			[
+				"current",
+				"currentDate"
+			],
+			[
+				"con",
+				"constructor"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"inA",
+				"inAProto"
+			],
+			[
+				"age",
+				"age"
+			],
+			[
+				"ha",
+				"hasOwnProperty"
+			],
+			[
+				"pre",
+				"personAges"
+			],
+			[
+				"per",
+				"personObj"
+			],
+			[
+				"person",
+				"personNames"
+			],
+			[
+				"re",
+				"reduce"
+			],
+			[
+				"min",
+				"minAge"
+			],
+			[
+				"pers",
+				"persArr"
+			],
+			[
+				"remaining",
+				"remainingDays"
+			],
+			[
+				"rema",
+				"remainingMilliSeconds"
+			],
+			[
+				"split",
+				"splitDate"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"to",
+				"toLowerCase"
+			],
+			[
+				"string",
+				"stringArray"
+			],
+			[
+				"my",
+				"myNumber"
+			],
+			[
+				"pro",
+				"property"
+			],
+			[
+				"var",
+				"var1"
+			],
+			[
+				"mo",
+				"mocha_phantomjs"
+			],
+			[
+				"op",
+				"options"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "memory.sublime-project",
+			"settings":
+			{
+				"buffer_size": 99,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 327.0,
+		"selected_items":
+		[
+			[
+				"if",
+				"Snippet: if"
+			],
+			[
+				"s",
+				"Snippet: if"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/index.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/2-labbymezzage/css/foundation-icons.css",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/2-labbymezzage/css/main.css",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/2-labbymezzage/js/lib/WEBAPP.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/2-labbymezzage/js/mod/dom.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/2-labbymezzage/js/require.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/strings/script.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/tests/vandalen.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/vandalen/script.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/vandalen/index.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/birthday/script.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/vandalen/test.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/vandalen/index1.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/tests/qunit.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/birthday/index.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/strings/index.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/guess/index.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/guess/script.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/javascript/secretnumber.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/1-vandalen/index.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/lecture1.js",
+		"/Users/sheriefbadran/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Applications/MAMP/htdocs/www/webbteknik1/package.json",
+		"/Applications/MAMP/htdocs/www/webbteknik1/javascript/uppgift1.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/javascript/laborations.sublime-project"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"clear",
+			"listenerAttachElement",
+			"this",
+			"console",
+			"divLower",
+			"p",
+			"class*=\"foundicon-\"",
+			"document",
+			"messageHandler",
+			"#messageSection",
+			"doc",
+			"document",
+			"message",
+			"callback",
+			"eventHandler",
+			"evHandler",
+			"WEBAPP",
+			"webbapp",
+			"first",
+			"firstSubMenu",
+			"message",
+			"born",
+			"!>",
+			"f",
+			"test",
+			"null",
+			"true",
+			"<script src=\"../tests/qunit.js\"></script>",
+			"minAge",
+			"personAges",
+			"D",
+			"d",
+			"D",
+			"d",
+			"D",
+			"d",
+			"now",
+			"oneDay",
+			"end",
+			"u",
+			"x",
+			"myNumber",
+			"number",
+			"var1"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "memory.sublime-project",
+					"settings":
+					{
+						"buffer_size": 99,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								98,
+								98
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"do",
+				"app/domOperations.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 369.0,
+	"status_bar_visible": true
+}

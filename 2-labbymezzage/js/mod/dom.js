@@ -1,23 +1,25 @@
 define(["mod/dom"],function(){
 	return{
-		getElementFrag: function(text, date){
+		printMessages: function(doc, storage, Message, count, counterData){
+			var messageSection = doc.querySelector('#messageSection');
+			var counterBoxSection = doc.querySelector("#counter");
+			// var counterData = doc.createTextNode("Antal Meddelanden: 0");
+			var input = doc.querySelector("#message");
 
-			var doc = document, section, div, p, t, d,
-			frag = doc.createDocumentFragment();
+			console.log(storage);
+			// variables for worker function
+			var frag;
 
-			section = doc.createElement('section');
-			div = doc.createElement('div');
-			p = doc.createElement('p');
-			t = doc.createTextNode(text);
+			// Create a new Message reference/object and sore it in the MessageStorage class.
+			storage.storeMessage(new Message(input.value, new Date()));
 
-			section.className = 'row';
-			div.className = 'message small-6 small-centered columns';
-			p.className = 'text columns';
+			frag = storage.RenderMessage(count);
+			messageSection.appendChild(frag);
+			input.value = "";
 
-			section.appendChild(div);
-			div.appendChild(p);
-			p.appendChild(t);
-			frag.appendChild(section);
+			// Replace and update counter data.
+			counterData.nodeValue = "Antal meddelanden: " + (count + 1).toString();
+			counterBoxSection.appendChild(counterData);
 
 			return frag;
 		},

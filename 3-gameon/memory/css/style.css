@@ -1,0 +1,30 @@
+#main{
+	min-height: 900px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #000;
+}
+
+.board{
+	float:left;
+	margin-left: auto;
+	margin-right: auto;
+	height: 25%;
+	width: 26%;
+	border: 1px solid #000;
+}
+
+figure img{
+	border: 1px solid #666;
+	background-color: #fff;
+	padding: 20px;
+	margin: 2px;
+}
+
+figure{
+	float: left;
+	/*margin: 10px 10px 10px;*/
+	margin-left: 4px;
+	margin-right: auto;
+}
