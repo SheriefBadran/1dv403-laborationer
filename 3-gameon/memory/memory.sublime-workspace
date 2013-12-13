@@ -4,6 +4,214 @@
 		"selected_items":
 		[
 			[
+				"currentM",
+				"currentMemoryGame"
+			],
+			[
+				"renderRows",
+				"renderRowsAndColumns"
+			],
+			[
+				"current",
+				"currentMemoryGame"
+			],
+			[
+				"render",
+				"renderRowsAndColumns"
+			],
+			[
+				"cur",
+				"currentMemoryGame"
+			],
+			[
+				"rows",
+				"rowsAndColumns"
+			],
+			[
+				"in",
+				"innerHTML"
+			],
+			[
+				"option",
+				"optionElements"
+			],
+			[
+				"op",
+				"optionElements"
+			],
+			[
+				"select",
+				"selectRowDiv"
+			],
+			[
+				"selectRow",
+				"selectRowDiv"
+			],
+			[
+				"sho",
+				"shownImages"
+			],
+			[
+				"splitArray",
+				"splitArrayTwo"
+			],
+			[
+				"split",
+				"splitArray"
+			],
+			[
+				"ran",
+				"randomNumberArray"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"random",
+				"randomPictureArray"
+			],
+			[
+				"colu",
+				"Columns"
+			],
+			[
+				"ima",
+				"images"
+			],
+			[
+				"query",
+				"querySelectorAll"
+			],
+			[
+				"img",
+				"imagePackage"
+			],
+			[
+				"re",
+				"receiveImagePackage"
+			],
+			[
+				"row",
+				"rowHandler"
+			],
+			[
+				"event",
+				"eventType"
+			],
+			[
+				"add",
+				"addEventListener"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"qu",
+				"queryId"
+			],
+			[
+				"crea",
+				"createElement"
+			],
+			[
+				"sle",
+				"selectWrapper"
+			],
+			[
+				"M",
+				"MemoryStorage"
+			],
+			[
+				"memory",
+				"memoryStorage"
+			],
+			[
+				"columns",
+				"columns"
+			],
+			[
+				"memo",
+				"memoryStorage"
+			],
+			[
+				"new",
+				"newgame"
+			],
+			[
+				"co",
+				"columnOptionElement"
+			],
+			[
+				"def",
+				"defaultColumnsOptionElement"
+			],
+			[
+				"column",
+				"columnSelectElement"
+			],
+			[
+				"o",
+				"optionElement"
+			],
+			[
+				"se",
+				"selectRowDiv"
+			],
+			[
+				"sele",
+				"selected"
+			],
+			[
+				"set",
+				"setRowsAndColumns"
+			],
+			[
+				"has",
+				"hasAttribute"
+			],
+			[
+				"handle",
+				"handleEvent"
+			],
+			[
+				"sub",
+				"subscribers"
+			],
+			[
+				"pub",
+				"pubtype"
+			],
+			[
+				"subs",
+				"subscribe"
+			],
+			[
+				"publi",
+				"publish"
+			],
+			[
+				"image",
+				"imagePackage"
+			],
+			[
+				"create",
+				"createElement"
+			],
+			[
+				"game",
+				"gameWrapper"
+			],
+			[
+				"pro",
+				"prop"
+			],
+			[
+				"subscri",
+				"subscribers"
+			],
+			[
 				"counter",
 				"counterData"
 			],
@@ -68,10 +276,6 @@
 				"spanDelete"
 			],
 			[
-				"get",
-				"getText"
-			],
-			[
 				"messag",
 				"messageRef"
 			],
@@ -108,10 +312,6 @@
 				"handlerSettings"
 			],
 			[
-				"current",
-				"currentDate"
-			],
-			[
 				"con",
 				"constructor"
 			],
@@ -144,10 +344,6 @@
 				"personNames"
 			],
 			[
-				"re",
-				"reduce"
-			],
-			[
 				"min",
 				"minAge"
 			],
@@ -162,10 +358,6 @@
 			[
 				"rema",
 				"remainingMilliSeconds"
-			],
-			[
-				"split",
-				"splitDate"
 			],
 			[
 				"for",
@@ -184,38 +376,54 @@
 				"myNumber"
 			],
 			[
-				"pro",
-				"property"
-			],
-			[
 				"var",
 				"var1"
 			],
 			[
 				"mo",
 				"mocha_phantomjs"
-			],
-			[
-				"op",
-				"options"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "memory.sublime-project",
+			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 99,
+				"buffer_size": 5442,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "index.html",
+			"file": "js/main.js",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 2265,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/memory.js",
+			"settings":
+			{
+				"buffer_size": 9155,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/MemoryStorage.js",
+			"settings":
+			{
+				"buffer_size": 621,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/lib/observer.js",
+			"settings":
+			{
+				"buffer_size": 3010,
 				"line_ending": "Unix"
 			}
 		}
@@ -252,6 +460,14 @@
 	},
 	"file_history":
 	[
+		"/Applications/MAMP/htdocs/www/memory/js/lib/observer.js",
+		"/Users/sheriefbadran/Documents/memory/index.htm",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/js/lib/webapp/WEBAPP.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/script/random.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/js/lib/observer.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/js/mod/memory",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/css/style.css",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/testindex.html",
 		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/index.html",
 		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/2-labbymezzage/css/foundation-icons.css",
 		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/2-labbymezzage/css/main.css",
@@ -294,6 +510,33 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"trigEvents",
+			"startGame",
+			"rowOptionElement",
+			"defaultRowsOptionElement",
+			"rowSelectElement",
+			"selectRowDiv",
+			"splitArrayTwo",
+			"memoryImages",
+			"splitArrayTwo",
+			"hiddenImages",
+			"shownImages",
+			"imageArray",
+			"hiddenPictures",
+			"splitArray",
+			"parseInt",
+			"id",
+			"optionElement",
+			"renderNewBoard",
+			"createNewMemoryBoard",
+			"renderMemoryBoard",
+			"columnNumber",
+			"start",
+			"this",
+			"WEBAPP",
+			"OBSERVER",
+			"WEBAPP",
+			"medium",
 			"clear",
 			"listenerAttachElement",
 			"this",
@@ -360,37 +603,10 @@
 			[
 				{
 					"buffer": 0,
-					"file": "memory.sublime-project",
-					"settings":
-					{
-						"buffer_size": 99,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								98,
-								98
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 5442,
 						"regions":
 						{
 						},
@@ -403,10 +619,120 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 141.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/main.js",
+					"settings":
+					{
+						"buffer_size": 2265,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1105,
+								1105
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/memory.js",
+					"settings":
+					{
+						"buffer_size": 9155,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6647,
+								6647
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/MemoryStorage.js",
+					"settings":
+					{
+						"buffer_size": 621,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/lib/observer.js",
+					"settings":
+					{
+						"buffer_size": 3010,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								799,
+								799
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 493.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

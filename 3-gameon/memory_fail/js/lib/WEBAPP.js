@@ -598,10 +598,9 @@ WEBAPP.utilities.handleEvent = (function(){
 				}
 
 				// IE.
-				// if(preventDefault === true && typeof e.returnValue !== "undefined"){
-				// 	e.returnValue = false;
-				// }
-				element.removeEventListener(eventType, workOnEvent, useCapture);
+				if(preventDefault === true && typeof e.returnValue !== "undefined"){
+					e.returnValue = false;
+				}
 			};
 		}
 	};

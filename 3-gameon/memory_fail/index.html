@@ -10,12 +10,7 @@
         <header class="row">
             <h1 class="large-4 large-centered columns">Memory</h1>
         </header>
-        <div class="row">
-            <div class="large-3 columns">
-                <input class="newgame" type="button" value="start new memory" />
-            </div>
-        </div>
-        <div id="games" class="large-8 large-centered columns">
+        <div id="game1" class="large-8 large-centered columns">
 <!--             <div class="row">
                 <div class="large-4 large-centered columns">
                     <div class="large-2 columns"> 
@@ -56,10 +51,10 @@
                 </div>
             </div> -->
 
-<!--             <div class="row select">
-                <div class="large-4 columns">
-                    <select class="memoryRows">
-                        <option disabled="true" selected>Select Rows</option>
+            <div class="row firstSelect">
+                <div class="large-3 columns">
+                    <label>First Select Rows</label>
+                    <select id="rows">
                         <option value="1" class="rowValue">1</option>
                         <option value="2" class="rowValue">2</option>
                         <option value="3" class="rowValue">3</option>
@@ -68,10 +63,11 @@
                         <option value="6" class="rowValue">6</option>
                     </select>
                 </div>
-
-                <div class="large-4 columns">
-                    <select class="memoryColumns">
-                        <option disabled="true" selected>Select Columns</option>
+            </div>
+            <div class="row">
+                <div class="large-3 columns">
+                    <label>Then Select Columns</label>
+                    <select id="columns">
                         <option value="1" class="columnValue">1</option>
                         <option value="2" class="columnValue">2</option>
                         <option value="3" class="columnValue">3</option>
@@ -80,55 +76,8 @@
                         <option value="6" class="columnValue">6</option>
                     </select>
                 </div>
-            </div> -->
+            </div>
         </div>
-        <script src = "js/lib/observer.js"></script>
-        <script src = "js/lib/WEBAPP.js"></script>
-        <script src = "js/MemoryStorage.js"></script>
-        <script src = "js/Memory.js"></script>
-        <script src = "js/main.js"></script>
+        <script data-main="js/main.js" src="js/require.js"></script>
     </body>
 </html>
-<!--     function flip(e){
-        var target = e.target;
-        count++;
-
-        if(count <= 2){
-
-
-
-            var i;
-            for(var i = 1; i < shownImages.length + 1; i+=1){
-
-                var j;
-                for(j = 1; j < shownImages[i-1].length + 1; j+=1) {
-                    if(target === shownImages[i-1][j-1]){
-
-                        if(count === 1){
-                            target.src = "css/" + secretImages[i-1][j-1];
-                            firstShownImage = target;
-                            console.log(firstShownImage.src);
-                        }
-
-                        if(count === 2){
-                            target.src = "css/" + secretImages[i-1][j-1];
-                            secondShownImage = target;
-                            console.log(secondShownImage.src);
-
-                            reflipImage = setTimeout(function(){
-                                firstShownImage.src = "css/0.png";
-                                secondShownImage.src = "css/0.png";
-                            }, 1500);
-                        }
-
-                        if(secondShownImage && firstShownImage.src === secondShownImage.src)
-                        clearTimeout(reflipImage);
-                        // console.log(shownImages[i-1][j-1].src.value);
-                    }
-                }
-            }
-        }
-        // if(count === 2){
-        //  count = 0;
-        // }
-    }; -->

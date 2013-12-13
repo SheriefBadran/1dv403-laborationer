@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"render",
+				"renderBoard"
+			],
+			[
+				"event",
+				"event"
+			],
+			[
+				"make",
+				"makePublisher"
+			],
+			[
+				"sub",
+				"subscribers"
+			],
+			[
+				"pub",
+				"pubtype"
+			],
+			[
+				"subs",
+				"subscribe"
+			],
+			[
+				"publi",
+				"publish"
+			],
+			[
+				"image",
+				"imagePackage"
+			],
+			[
+				"column",
+				"columnNumber"
+			],
+			[
+				"row",
+				"rowDivs"
+			],
+			[
+				"create",
+				"createElement"
+			],
+			[
+				"re",
+				"referenceElement"
+			],
+			[
+				"game",
+				"gameWrapper"
+			],
+			[
+				"pro",
+				"prop"
+			],
+			[
+				"subscri",
+				"subscribers"
+			],
+			[
 				"counter",
 				"counterData"
 			],
@@ -144,10 +204,6 @@
 				"personNames"
 			],
 			[
-				"re",
-				"reduce"
-			],
-			[
 				"min",
 				"minAge"
 			],
@@ -184,10 +240,6 @@
 				"myNumber"
 			],
 			[
-				"pro",
-				"property"
-			],
-			[
 				"var",
 				"var1"
 			],
@@ -204,7 +256,7 @@
 	"buffers":
 	[
 		{
-			"file": "labbymezzage.sublime-project",
+			"file": "memory.sublime-project",
 			"settings":
 			{
 				"buffer_size": 99,
@@ -215,23 +267,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 1311,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/lib/WEBAPP.js",
-			"settings":
-			{
-				"buffer_size": 14349,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/lib/message.js",
-			"settings":
-			{
-				"buffer_size": 4466,
+				"buffer_size": 3605,
 				"line_ending": "Unix"
 			}
 		},
@@ -239,31 +275,39 @@
 			"file": "js/main.js",
 			"settings":
 			{
-				"buffer_size": 4269,
+				"buffer_size": 2438,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "js/mod/dom.js",
+			"file": "js/mod/memory.js",
 			"settings":
 			{
-				"buffer_size": 964,
+				"buffer_size": 2881,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "controler_test.js",
+			"file": "js/board/boardchoice.js",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 162,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "css/main.css",
+			"file": "js/random/randomGenerator.js",
 			"settings":
 			{
-				"buffer_size": 1660,
+				"buffer_size": 1201,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/observer/publisher.js",
+			"settings":
+			{
+				"buffer_size": 2594,
 				"line_ending": "Unix"
 			}
 		}
@@ -300,7 +344,16 @@
 	},
 	"file_history":
 	[
-		"/Applications/MAMP/htdocs/www/drag-and-drop/index.html",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/js/row_choice/rowchoice.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/main.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/js/lib/observer/observer.js",
+		"/Users/sheriefbadran/Documents/memory/index.htm",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/js/lib/webapp/WEBAPP.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/script/random.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/js/lib/observer.js",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/js/mod/memory",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/css/style.css",
+		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/testindex.html",
 		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/3-gameon/memory/index.html",
 		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/2-labbymezzage/css/foundation-icons.css",
 		"/Applications/MAMP/htdocs/www/webbteknik1/laborationer/1dv403-laborationer/2-labbymezzage/css/main.css",
@@ -343,8 +396,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"getText",
-			"toString",
+			"makePublisher",
+			"this",
+			"WEBAPP",
+			"OBSERVER",
+			"WEBAPP",
+			"medium",
 			"clear",
 			"listenerAttachElement",
 			"this",
@@ -406,12 +463,12 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "labbymezzage.sublime-project",
+					"file": "memory.sublime-project",
 					"settings":
 					{
 						"buffer_size": 99,
@@ -421,8 +478,8 @@
 						"selection":
 						[
 							[
-								99,
-								99
+								98,
+								0
 							]
 						],
 						"settings":
@@ -441,15 +498,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 1311,
+						"buffer_size": 3605,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								414,
-								414
+								3548,
+								3548
 							]
 						],
 						"settings":
@@ -466,18 +523,18 @@
 				},
 				{
 					"buffer": 2,
-					"file": "js/lib/WEBAPP.js",
+					"file": "js/main.js",
 					"settings":
 					{
-						"buffer_size": 14349,
+						"buffer_size": 2438,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								749,
-								707
+								1655,
+								1655
 							]
 						],
 						"settings":
@@ -486,25 +543,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 207.0,
+						"translation.y": 1000.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "js/lib/message.js",
+					"file": "js/mod/memory.js",
 					"settings":
 					{
-						"buffer_size": 4466,
+						"buffer_size": 2881,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								715,
-								715
+								1158,
+								1160
 							]
 						],
 						"settings":
@@ -520,24 +577,23 @@
 				},
 				{
 					"buffer": 4,
-					"file": "js/main.js",
+					"file": "js/board/boardchoice.js",
 					"settings":
 					{
-						"buffer_size": 4269,
+						"buffer_size": 162,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								727,
-								727
+								127,
+								127
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -547,37 +603,10 @@
 				},
 				{
 					"buffer": 5,
-					"file": "js/mod/dom.js",
+					"file": "js/random/randomGenerator.js",
 					"settings":
 					{
-						"buffer_size": 964,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								964,
-								964
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "controler_test.js",
-					"settings":
-					{
-						"buffer_size": 0,
+						"buffer_size": 1201,
 						"regions":
 						{
 						},
@@ -594,34 +623,34 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 8.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "css/main.css",
+					"buffer": 6,
+					"file": "js/observer/publisher.js",
 					"settings":
 					{
-						"buffer_size": 1660,
+						"buffer_size": 2594,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1338,
-								1338
+								341,
+								341
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 723.0,
+						"translation.y": 402.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

@@ -1,63 +1,118 @@
-'use strict';
-var publisher = {
-	subscribers: {
+var MEDIATOR = MEDIATOR || {};
+
+MEDIATOR.namespace = function(ns_string)
+{
+	var parts = ns_string.split('.'),
+	parent = MEDIATOR,
+	i;
+	
+	if(parts[0] === "MEDIATOR")
+	{
+		parts = parts.slice(1);
+	}
+	
+	for(i=0; i<parts.length; i+=1)
+	{
+		if(typeof parent[parts[i]] === "undefined")
+		{
+			parent[parts[i]] = {};
+		}
+		parent = parent[parts[i]];
+	}
+	return parent;
+}
+
+MEDIATOR.namespace('core.observer');
+
+MEDIATOR.core.observer = (function(){
+
+	var subscribers = {
 		//event type: subscribers
 		any: [] 
-	},
-	subscribe: function(fn, type){
+	};
+	console.log(subscribers);
+	// private properties
+	var subscribe = function(fn, type){
 		type = type || 'any';
 		if(typeof this.subscribers[type] === "undefined"){
 			this.subscribers[type] = [];
 		}
 		this.subscribers[type].push(fn);
+
+		return this;
 	},
-	unsubscribe: function(fn, type){
-		this.visitSubscribers('unsubscribe', fn, type);
+
+	unsubscribe = function(fn, type){
+		visitSubscribers('unsubscribe', fn, type);
+
+		return this;
 	},
-	publish: function(publication, type){
-		this.visitSubscribers('publish', publication, type);
+
+	publish = function(publication, type){
+		visitSubscribers('publish', publication, type);
+
+		return this;
 	},
-	visitSubscribers: function(action, arg, type){
+
+	visitSubscribers = function(action, arg, type){
+		console.log(subscribers);
 		var pubtype = type || 'any',
-		subscribers = this.subscribers[pubtype],
+		// subscribers = this.subscribers[pubtype],
 		i,
-		max = subscribers.length;
+		max = subscribers[pubtype].length;
 
 		for(i=0; i<max; i+=1){
 			if(action === 'publish'){
-				subscribers[i](arg);
+				subscribers[pubtype][i](arg);
 			}
 			else{
-				if(subscribers[i] === arg){
-					subscribers.splice(i, 1);
+				if(subscribers[pubtype][i] === arg){
+					subscribers[pubtype].splice(i, 1);
 				}
 			}
 		}
-	}
-};
-
-
-function makePublisher(o){
-	var prop;
-	for(prop in publisher){
-		if (publisher.hasOwnProperty(prop) && typeof publisher[prop] === "function"){
-			o[prop] = publisher[prop];
+		return this;
+	};
+	// facade and public API
+	return{
+		subscribers: subscribers,
+		subscribe: subscribe,
+		unsubscribe: unsubscribe,
+		publish: publish,
+		makePublisher: function(o){
+			var prop;
+			// console.log(observer);
+			console.log(this);
+			for(prop in this){
+				if (this.hasOwnProperty(prop) && typeof this[prop] === "function"){
+					o[prop] = this[prop];
+				}
+			}
+			o.subscribers = {any: []};
 		}
-	}
-	o.subscribers = {any: []};
-}
+	};
+}());
+
+// var observer = MEDIATOR.core.observer;
+// var publish = observer.publish;
+// var subscribe = observer.subscribe;
+
+// console.log(observer.makePublisher);
+// console.log(publish);
+// console.log(subscribe);
 
 // var paper = {
 // 	daily: function(){
-// 		this.publish("big news today");
+// 		observer.publish("big news today");
 // 	},
 // 	monthly: function(){
-// 		this.publish("interesting analysis", "monthly");
+// 		observer.publish("interesting analysis", "monthly");
 // 	}
 // };
 
-// paper is a publisher
-// makePublisher(paper);
+// // paper is a publisher
+// observer.makePublisher(paper);
+// console.log(paper);
 
 // var joe = {
 // 	drinkCoffee: function(paper){
@@ -68,25 +123,27 @@ function makePublisher(o){
 // 	}
 // };
 
-// paper get to know about joe's activities
-// paper.subscribe(joe.drinkCoffee);
-// paper.subscribe(joe.sundayPreNap, "monthly");
+// // paper get to know about joe's activities
+// observer.subscribe(joe.drinkCoffee);
+// observer.subscribe(joe.sundayPreNap, "monthly");
 
 // paper.daily();
 // paper.daily();
 // paper.daily();
 // paper.monthly();
 
-// makePublisher(joe);
+// observer.makePublisher(joe);
 
 // joe.tweet = function(msg){
-// 	this.publish(msg);
+// 	observer.publish(msg);
 // };
 
 // paper.readTweets = function(tweet){
 // 	console.log('Call big meeting - ' + tweet);
 // };
 
-// joe.subscribe(paper.readTweets);
+// observer.subscribe(paper.readTweets);
 
 // joe.tweet("hated the paper today");
+
+// console.log(observer.subscribers);

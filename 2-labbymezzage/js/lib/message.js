@@ -101,6 +101,10 @@ LABBY.Chat = (function()
 			return messages[index];
 		};
 
+		this.getHTMLMessage = function(index){
+			return messages[index].getText().replace(/[\n\r]/g, "<br />");
+		}
+
 		this.getAllMessages = function(){
 			return messages;
 		};
@@ -131,7 +135,7 @@ LABBY.Chat = (function()
 			pDelete = doc.createElement('p');
 			pDate = doc.createElement('p');
 			pMessage = doc.createElement('p');
-			pMessage.innerHTML = this.getMessage(messageID);
+			pMessage.innerHTML = this.getHTMLMessage(messageID);
 			spanTime = doc.createElement('span');
 			spanTime.innerHTML = this.getMessage(messageID).getTime();
 			pTime = doc.createElement('p');

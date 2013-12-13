@@ -111,10 +111,14 @@ requirejs(files, function(webapp, message, dom){
 		eventType: "keypress",
 
 		filterOut: function(target, e){
+
 			if(e.keyCode !== 13){
 				return true;
 			}
-			return false;
+			else if(e.shiftKey){
+				return true;
+			}
+			
 		},
 
 		worker: function(target, e){

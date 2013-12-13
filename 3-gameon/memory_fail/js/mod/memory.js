@@ -1,6 +1,4 @@
 define(["mod/memory", "observer/publisher"],function(memory, observer){
-	
-	// global variables;
 
 	return{
 		renderRows: function(rows){
@@ -43,6 +41,8 @@ define(["mod/memory", "observer/publisher"],function(memory, observer){
 			// is parsed to a number that gives number of columns.
 			if(typeof arg === "string"){
 
+				var imagePackage = {};
+
 				columnNumber = parseInt(arg);
 				console.log("render " + columnNumber + " columns.");
 				
@@ -69,6 +69,7 @@ define(["mod/memory", "observer/publisher"],function(memory, observer){
 
 				// Set attributes for img tags.
 				img.src = "css/0.png";
+				img.className = "image";
 				img.height = "24";
 				img.width = "24";
 
@@ -76,12 +77,16 @@ define(["mod/memory", "observer/publisher"],function(memory, observer){
 
 				// Iterate through every row. For each row, iterate as many times as number of columns
 				// and render all columns to each row.
+
+				var rowDivs = []
+				var rows = frag.childNodes.length;
 				var i;
-				for(i = 0; i < frag.childNodes.length; i+=1) {
+				for(i = 0; i < rows; i+=1){
 
 					var j;
-					for (j = 0; j < columnNumber; j+=1) {
+					for (j = 0; j < columnNumber; j+=1){
 						frag.childNodes[i].firstChild.appendChild(div.cloneNode());
+						rowDivs.push(frag.querySelector(".image"));
 					};
 					
 				};
@@ -90,6 +95,11 @@ define(["mod/memory", "observer/publisher"],function(memory, observer){
 				// within the game wrapper.
 				gameWrapper.insertBefore(frag, referenceElement);
 
+				imagePackage.images = rowDivs;
+				imagePackage.rows = rows;
+				imagePackage.cols = columnNumber;
+
+				observer.publish(imagePackage);
 				// return the final document fragment for the game.
 				return frag; 
 			}
