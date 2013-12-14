@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang = "sv">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Forms</title>
+		<link href="foundation.css" rel="stylesheet" type="text/css"/>
+		<link href="form.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<section class="large-12 columns">
+			<head>
+				<h1>Kontaktformulär</h1>
+			</head>
+			<form action="http://voyager.lnu.se/tekinet/kurser/dtt/wp_webbteknik/process_form.php" method="post">
+			    <!--<fieldset>-->
+				<!-- first row -->
+				<div class="row">
+					<div class="firstname-field large-6 columns">
+						<label>Förnamn <small>obligatoriskt</small></label>
+						<input name="firstname" id="firstname" class="name" type="text" />
+						<small class="sucess"></small> 
+					</div>
+			        <div class="lastname-field large-6 columns">
+						<label> Efternamn </label>
+						<input name="lastname" id="lastname" class="notEmpty" type="text" />
+						<small class="success"></small>
+					</div>
+			    </div>
+				<!-- second row -->
+				<div class="row">
+					<div class="postnumber-field large-6 columns">
+						<label> Postnummer </label>
+						<input name="postnumber" id="postnumber" class="isSwePostNum" type="text" />
+						<small class="success"></small> 
+					</div>
+					<div class="email-field large-6 columns">
+					 	<label>E-post: <small>obligatoriskt</small></label>
+						<input name="email" id="email" class="isEmail" type="email" />
+						<small class="success"></small> 
+					</div>
+				</div>
+				<!-- third row -->
+				<div class="row">
+					<div class="message large-3 columns">
+						<label>Prismodell</label>
+						<select name="PriseAlternative">
+							<option value="låg">Låg</option>
+							<option value="medel">Medel</option>
+							<option value="hög">Hög</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="message large-12 columns">
+						<input type="submit" name="submitbutton" value="Skicka" class="button success" />
+					</div>
+				</div>
+			    <!--</fieldset>-->		
+			</form>
+		</section>
+
+		<script src="validator.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>
