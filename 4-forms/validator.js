@@ -1,3 +1,4 @@
+'use strict';
 var validator = {
 
 	// all checks
@@ -60,11 +61,35 @@ validator.types.notEmpty = {
 	instructions: "Fältet får inte vara tomt."
 };
 
-validator.types.name = {
+validator.types.firstName = {
 
 	validate: function(value){
 		return value !== "" && value.match(/^[a-zA-Z]+$/);
 	},
 
-	instructions: "Ange giltigt förnamn (endast bokstäver)."
+	instructions: "Ange ett giltigt förnamn (endast bokstäver)."
 };
+
+validator.types.lastName = {
+	validate: function(value){
+		return value !== "" && value.match(/^[a-zA-Z]+$/);
+	},
+
+	instructions: "Ange ett giltigt efternamn (endast bokstäver)."
+};
+
+validator.types.swePostNum = {
+	validate: function(value){
+		return value !== "";
+	},
+
+	instructions: "Ange ett giltigt postnummer (xxxxx)."
+}
+
+validator.types.Email = {
+	validate: function(value){
+		return value !== "" && value.match(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i);
+	},
+
+	instructions: "Ange en giltig E-post adress."
+}

@@ -15,33 +15,33 @@
 			<form action="http://voyager.lnu.se/tekinet/kurser/dtt/wp_webbteknik/process_form.php" method="post">
 			    <!--<fieldset>-->
 				<!-- first row -->
-				<div class="row">
+				<div class="row fieldWrapper">
 					<div class="firstname-field large-6 columns">
 						<label>Förnamn <small>obligatoriskt</small></label>
-						<input name="firstname" id="firstname" class="name" type="text" />
-						<small class="sucess"></small> 
+						<input name="firstname" id="firstname" class="firstName" type="text" />
+						<small class="success"></small> 
 					</div>
 			        <div class="lastname-field large-6 columns">
 						<label> Efternamn </label>
-						<input name="lastname" id="lastname" class="notEmpty" type="text" />
+						<input name="lastname" id="lastname" class="lastName" type="text" />
 						<small class="success"></small>
 					</div>
 			    </div>
 				<!-- second row -->
-				<div class="row">
+				<div class="row fieldWrapper">
 					<div class="postnumber-field large-6 columns">
 						<label> Postnummer </label>
-						<input name="postnumber" id="postnumber" class="isSwePostNum" type="text" />
+						<input name="postnumber" id="postnumber" class="swePostNum" type="text" />
 						<small class="success"></small> 
 					</div>
 					<div class="email-field large-6 columns">
 					 	<label>E-post: <small>obligatoriskt</small></label>
-						<input name="email" id="email" class="isEmail" type="email" />
+						<input name="email" id="email" class="Email" type="email" />
 						<small class="success"></small> 
 					</div>
 				</div>
 				<!-- third row -->
-				<div class="row">
+				<div class="row fieldWrapper">
 					<div class="message large-3 columns">
 						<label>Prismodell</label>
 						<select name="PriseAlternative">
@@ -53,14 +53,14 @@
 				</div>
 				<div class="row">
 					<div class="message large-12 columns">
-						<input type="submit" name="submitbutton" value="Skicka" class="button success" />
+						<input type="submit" name="submitbutton" value="Genomför köp" id="button" class="button success" />
 					</div>
 				</div>
 			    <!--</fieldset>-->		
 			</form>
 		</section>
 
-		<script src="validator.js"></script>
-		<script src="main.js"></script>
+		<script src="validator.js" type="text/javascript"></script>
+		<script src="main.js" type="text/javascript"></script>
 	</body>
 </html>

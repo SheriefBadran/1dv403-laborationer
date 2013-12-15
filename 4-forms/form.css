@@ -1,0 +1,8 @@
+section form .error{
+	padding-top: 0.10em;
+	padding-bottom: 0.10em;
+}
+
+section form .error p{
+	padding-top: 0.10em;
+}

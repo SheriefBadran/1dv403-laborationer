@@ -1,98 +1,115 @@
+'use strict';
 window.onload = init;
 
 function init(){
 
 	var doc = document;
 
-	var firstName = doc.querySelector("#firstname");
-	firstName.focus();
+	// Field onblur
+	doc.body.addEventListener("blur", function(e) {
+		e = e || window.event;
+		var target = (typeof e.target !== "undefined") ? e.target : e.srcElement;
 
-	firstName.onblur = function () {
-		validate(this.value, this.id, this.className);
-	};
+		// filter out everything except form fields input
+		if (target.tagName.toLowerCase() !== "input" || target.id === "button" 
+		|| target.tagName.toLowerCase() === "select") {
 
-	var lastName = doc.querySelector("#lastname");
-	lastName.onblur = function(){
-		validate(this.value, this.id, this.className);
-	};
+			return;
+		};
 
-	var postNumber = doc.querySelector("#postnumber");
-	postNumber.onblur = function(){
-		validate(this.value, this.id, this.className);
-	};
+		// Validate field value.
+		validateField(target.value, target.id, target.className);
 
-	var email = doc.querySelector("#email");
-	email.onblur = function(){
-		validate(this.value, this.id, this.className);
-	};
+	}, true);
+
+	// If button is clicked
+	doc.body.addEventListener("click", function(e) {
+
+		e = e || window.event;
+		var target = (typeof e.target !== "undefined") ? e.target : e.srcElement;
+
+		// filter out everything except button
+		if (target.id !== "button") {
+			return;
+		};
+
+		var fields = doc.querySelectorAll("input");
+		console.log(fields);
+
+		for (var i = 0; i < fields.length; i++) {
+			if (fields[i].id !== "button") {
+				validateField(fields[i].value, fields[i].id, fields[i].className);
+			}
+
+			// PREVENT DEFAULT IS ALWAYS EXCECUTED!!!!
+			// prevent form from sending to server, everything is handled on the client.
+			if(e.preventDefault && typeof e.preventDefault === "function") {
+				e.preventDefault();
+			}
+
+			// IE.
+			if(!e.preventDefault && typeof e.returnValue !== "undefined") {
+				e.returnValue = false;
+			}
+		};
+
+
+
+	}, false);
 };
 
-function validate(value, fieldID, className){
-	var field = document.getElementById(fieldID);
-	var errorField = field.nextSibling.nextSibling;
-	var value = value, fieldID = fieldID, className = className;
-	console.log(value);
-	console.log(fieldID);
-	console.log(className);
+function validateField(value, fieldID, className) {
 
-	switch(className){
+	var field = document.getElementById(fieldID),
+	errorMsgElement = field.nextSibling.nextSibling,
+	value = value, 
+	fieldID = fieldID, 
+	className = className,
 
-		case "notEmpty":
-			sendDataToValidator();
-			break;
+	fieldData = {};
+	validator.config = {};
 
-		case "name":
-			sendDataToValidator();
-			break;
+	// dynamically add a property name and it's value to the fieldData-object
+	// DATA TO BE VALIDATED
+	fieldData[className] = value;
 
-		case "isSwePostNum":
-			// code
-			break;
+	// dynamically add a property name and it's value to the config-object
+	// CONFIGURATE VALIDATION TYPE
+	validator.config[className] = className;
 
-		case "isEmail":
-			// code
-			break;
+	// TRY VALIDATE FIELD DATA
+	try {
+		validator.validate(fieldData);
 	}
+	catch(e) {
+		console.log(e.name + " " + e.message);
+	}
+	
 
-	function sendDataToValidator() {
-		// body...
-		var data = {};
-		validator.config = {};
+	// RETRIEVE ERROR MESSAGE AND DISPLAY IT TO THE USER
+	if (validator.hasErrors()) {
 
-		// dynamically add a property name and it's value to the data-object
-		data[className] = value;
+		var errorMsgContent = errorMsgElement.firstChild;
 
-		// dynamically add a property name and it's value to the config-object
-		validator.config[className] = className;
+		// IF ERROR MESSAGE ALREADY EXISTS DON'T BOTHER CONTINUE
+		if(errorMsgContent) {
+			return;
+		}
 
-		console.log(data);
-		console.log(validator.config);
+		// CREATE ERROR MESSAGE AND DISPLAY IT
+		var message = document.createTextNode(validator.messages);
+		var p = document.createElement('p');
+		p.appendChild(message);
+		errorMsgElement.appendChild(p);
+		errorMsgElement.className = "error";
+	};
 
-		validator.validate(data);
+	// IF ERROR IS CORRECTED REMOVE ERROR MESSAGE, IF NO ERROR - ASSURE CLASS NAME IS SET TO SUCCESS
+	if (!validator.hasErrors()) {
 
-		if (validator.hasErrors()) {
-			var message = document.createTextNode(validator.messages);
-			var p = document.createElement('p');
-			p.appendChild(message);
-			errorField.appendChild(p);
-			errorField.className = "error";
-
-			console.log(message);
-			console.log(errorField);
+		if (errorMsgElement.firstChild) {
+			errorMsgElement.removeChild(errorMsgElement.firstChild);
+			errorMsgElement.className = "success";
 		};
 	}
-
-	// var data = {
-	// 	notEmpty: ''
-	// };
-
-	// validator.config = {
-	// 	notEmpty: 'notEmpty'
-	// };
-
-	// validator.validate(data);
-
-	// if (validator.hasErrors()) {
-	// 	console.log(validator.messages.join("\n"));
-	// };
 }
