@@ -16,12 +16,12 @@
 			    <!--<fieldset>-->
 				<!-- first row -->
 				<div class="row fieldWrapper">
-					<div class="firstname-field large-6 columns">
+					<div id="firstNameWrapper" class="firstname-field large-6 columns">
 						<label>Förnamn <small>obligatoriskt</small></label>
 						<input name="firstname" id="firstname" class="firstName" type="text" />
 						<small class="success"></small> 
 					</div>
-			        <div class="lastname-field large-6 columns">
+			        <div id="lastNameWrapper" class="lastname-field large-6 columns">
 						<label> Efternamn </label>
 						<input name="lastname" id="lastname" class="lastName" type="text" />
 						<small class="success"></small>
@@ -29,12 +29,12 @@
 			    </div>
 				<!-- second row -->
 				<div class="row fieldWrapper">
-					<div class="postnumber-field large-6 columns">
+					<div id="swePostNumWrapper" class="postnumber-field large-6 columns">
 						<label> Postnummer </label>
 						<input name="postnumber" id="postnumber" class="swePostNum" type="text" />
 						<small class="success"></small> 
 					</div>
-					<div class="email-field large-6 columns">
+					<div id="EmailWrapper" class="email-field large-6 columns">
 					 	<label>E-post: <small>obligatoriskt</small></label>
 						<input name="email" id="email" class="Email" type="email" />
 						<small class="success"></small> 
@@ -44,7 +44,7 @@
 				<div class="row fieldWrapper">
 					<div class="message large-3 columns">
 						<label>Prismodell</label>
-						<select name="PriseAlternative">
+						<select name="PriseAlternative" id="priseLevelList">
 							<option value="låg">Låg</option>
 							<option value="medel">Medel</option>
 							<option value="hög">Hög</option>
@@ -53,12 +53,23 @@
 				</div>
 				<div class="row">
 					<div class="message large-12 columns">
-						<input type="submit" name="submitbutton" value="Genomför köp" id="button" class="button success" />
+<!-- 						<input type="submit" name="submitbutton" value="Genomför köp" id="button" class="button success" /> -->
+						<a id="button" class="button success" href="#" data-reveal-id="myModal">Genomför köp</a>
+						<div id="myModal" class="reveal-modal small" data-reveal=""><a class="close-reveal-modal">&#215;</a></div>
 					</div>
 				</div>
 			    <!--</fieldset>-->		
 			</form>
 		</section>
+
+		
+<!-- 		<div id="myModal" class="reveal-modal small" data-reveal="">
+			<a class="close-reveal-modal">&#215;</a>
+			<h2>Vänligen bekräfta ditt köp<h2/>
+		</div> -->
+
+		<div id="background">
+		</div>
 
 		<script src="validator.js" type="text/javascript"></script>
 		<script src="main.js" type="text/javascript"></script>

@@ -3,7 +3,12 @@ window.onload = init;
 
 function init(){
 
-	var doc = document;
+	var doc = document,
+	errorIndicators = [],
+	validationTypes = [],
+	p = doc.createElement('p'),
+	pTags = [],
+	// fieldHeadings = ["Förnamn: ", "Efternamn: ", "Postnummer: ", "E-post: "];
 
 	// Field onblur
 	doc.body.addEventListener("blur", function(e) {
@@ -22,56 +27,59 @@ function init(){
 
 	}, true);
 
-	// If button is clicked
+	// If button is clicked.
 	doc.body.addEventListener("click", function(e) {
 
 		e = e || window.event;
 		var target = (typeof e.target !== "undefined") ? e.target : e.srcElement;
 
-		// filter out everything except button
+		// filter out everything except button.
 		if (target.id !== "button") {
 			return;
 		};
 
+		// retrieve input fields.
 		var fields = doc.querySelectorAll("input");
-		console.log(fields);
 
+		// Iterate through every field and validate.
 		for (var i = 0; i < fields.length; i++) {
-			if (fields[i].id !== "button") {
-				validateField(fields[i].value, fields[i].id, fields[i].className);
-			}
-
-			// PREVENT DEFAULT IS ALWAYS EXCECUTED!!!!
-			// prevent form from sending to server, everything is handled on the client.
-			if(e.preventDefault && typeof e.preventDefault === "function") {
-				e.preventDefault();
-			}
-
-			// IE.
-			if(!e.preventDefault && typeof e.returnValue !== "undefined") {
-				e.returnValue = false;
+			if (fields[i].id !== "button" && fields[i].id !== "confirmButton") {
+				errorIndicators[i] = validateField(fields[i].value, fields[i].id, fields[i].className);
+				var p = doc.createElement('p');
+				p.appendChild(doc.createTextNode(fields[i].className + ": " + fields[i].value));
+				pTags[i] = p;
 			}
 		};
+		
+		var errorIndicator = errorIndicators.reduce(function(isTrue, indicator, i){
+			return isTrue && indicator === true;
+		}, true);
 
-
+		if(errorIndicator){
+			confirmPurchase(pTags);
+		}
 
 	}, false);
 };
 
 function validateField(value, fieldID, className) {
-
+	console.log(className);
+	var doc = document;
 	var field = document.getElementById(fieldID),
 	errorMsgElement = field.nextSibling.nextSibling,
-	value = value, 
-	fieldID = fieldID, 
+	errorMsgContent,
+	value = value,
+	fieldID = fieldID,
 	className = className,
+	validatedData;
 
-	fieldData = {};
+
+	var dataObj = {};
 	validator.config = {};
 
-	// dynamically add a property name and it's value to the fieldData-object
+	// dynamically add a property name and it's value to the dataObj-object
 	// DATA TO BE VALIDATED
-	fieldData[className] = value;
+	dataObj[className] = value;
 
 	// dynamically add a property name and it's value to the config-object
 	// CONFIGURATE VALIDATION TYPE
@@ -79,21 +87,29 @@ function validateField(value, fieldID, className) {
 
 	// TRY VALIDATE FIELD DATA
 	try {
-		validator.validate(fieldData);
+		validatedData = validator.validate(dataObj);
 	}
 	catch(e) {
 		console.log(e.name + " " + e.message);
 	}
-	
+
+	// Convert valid post number format to 
+	if (validatedData[0].swePostNum) {
+		validatedData[0].swePostNum = validatedData[0].swePostNum.replace(/-/g, "");
+		validatedData[0].swePostNum = validatedData[0].swePostNum.replace(/ /g, "");
+		validatedData[0].swePostNum = validatedData[0].swePostNum.replace(/SE/g, "");
+
+		document.getElementById(fieldID).value = validatedData[0].swePostNum;
+	};
 
 	// RETRIEVE ERROR MESSAGE AND DISPLAY IT TO THE USER
 	if (validator.hasErrors()) {
 
-		var errorMsgContent = errorMsgElement.firstChild;
+		errorMsgContent = errorMsgElement.firstChild;
 
 		// IF ERROR MESSAGE ALREADY EXISTS DON'T BOTHER CONTINUE
 		if(errorMsgContent) {
-			return;
+			return errorMsgContent;
 		}
 
 		// CREATE ERROR MESSAGE AND DISPLAY IT
@@ -102,6 +118,9 @@ function validateField(value, fieldID, className) {
 		p.appendChild(message);
 		errorMsgElement.appendChild(p);
 		errorMsgElement.className = "error";
+
+		console.log(validator.messages);
+		return validator.messages[0];
 	};
 
 	// IF ERROR IS CORRECTED REMOVE ERROR MESSAGE, IF NO ERROR - ASSURE CLASS NAME IS SET TO SUCCESS
@@ -111,5 +130,90 @@ function validateField(value, fieldID, className) {
 			errorMsgElement.removeChild(errorMsgElement.firstChild);
 			errorMsgElement.className = "success";
 		};
-	}
+
+		// If errormessages are displayed since blur validation.
+		return true;
+	};
+};
+
+var confirmPurchase = function(pTags) {
+	
+	// Declare needed variables
+	var doc = document, popup, background, priseLevelList, priseLevel, priseData,
+
+	// Create input tag for modal popup button
+	input = doc.createElement('input'),
+
+	// Create p tag for prise level data
+	p = doc.createElement('p'),
+
+	// Create data wrappper for modal popup
+	div = doc.createElement('div'),
+
+	// Create h2 tag for 
+	h2 = doc.createElement('h2'),
+
+	// Create text node for heading
+	headingText = doc.createTextNode('Vänligen bekräfta ditt köp');
+
+	// Set attributes for modal popup button
+	input.type = "submit";
+	input.value = "Bekräfta Köp!";
+	input.id = "confirmButton";
+	input.className = "button success";
+
+	// Retrieve modal popup
+	popup = doc.querySelector("#myModal");
+
+	// Retrieve modal background div
+	background = doc.querySelector("#background");
+
+	// confirmPurchase = function(errorIndicators, dataObj, pTags) {
+	// }
+
+	// Assamble html elements and render work
+	h2.appendChild(headingText);
+	div.appendChild(h2);
+
+	// Iterate through p tags and append each of them to the popup box.
+	for (var i = 0; i < pTags.length; i++) {
+		div.appendChild(pTags[i]);
+	};
+
+	// Retrieve select drop menu
+	priseLevelList = doc.querySelector("#priseLevelList");
+
+	// Retrieve selected option value and print value in popup box.
+	priseLevel = priseLevelList.options[priseLevelList.selectedIndex].value;
+	priseData = doc.createTextNode(priseLevelList.name + ": " + priseLevel);
+	p.appendChild(priseData);
+	div.appendChild(p);
+
+	div.appendChild(input);
+	popup.appendChild(div);
+
+	// Reveal modal popup box
+	popup.style.visibility = "visible";
+	popup.style.display = "block";
+	background.style.display = "block";
+
+	// Click event listener for closing popup box.
+	doc.body.addEventListener("click", function(e){
+		e = e || window.event;
+		var target = (typeof e.target !== "undefined") ? e.target : e.srcElement;
+
+		// filter out everything closing "x" sybol and modal background area.
+		if (target.className !== "close-reveal-modal" && target.id !== "background") {
+			return;
+		};
+
+		// Hide modal popup box
+		popup.style.visibility = "hidden";
+		popup.style.display = "none";
+		background.style.display = "none";
+
+		console.log(popup);
+		popup.removeChild(div);
+
+	}, false);
 }

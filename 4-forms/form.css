@@ -1,3 +1,13 @@
+html{
+	height: 100%;
+	width: 100%;
+}
+
+body{
+	height: 100%;
+	width: 100%;
+}
+
 section form .error{
 	padding-top: 0.10em;
 	padding-bottom: 0.10em;
@@ -6,3 +16,39 @@ section form .error{
 section form .error p{
 	padding-top: 0.10em;
 }
+
+#confirm{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	background-color: #000;
+	top: 100px;
+	left: 100px;
+	z-index: 100;
+
+}
+
+#myModal{
+	position: fixed;
+}
+
+#myModal h2{
+	font-size: 1.2em;
+}
+
+
+#background{
+	position: absolute;
+	display: none;
+	height: 100%;
+	width: 100%;
+	background-color: #000;
+	opacity: 0.5;
+	z-index: 0.1;
+}
+
+
+
+
+
+
