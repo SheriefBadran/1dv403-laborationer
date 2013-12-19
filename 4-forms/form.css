@@ -17,7 +17,7 @@ section form .error p{
 	padding-top: 0.10em;
 }
 
-#confirm{
+/*#confirm{
 	position: relative;
 	height: 100%;
 	width: 100%;
@@ -26,10 +26,18 @@ section form .error p{
 	left: 100px;
 	z-index: 100;
 
+}*/
+
+.popupData{
+	color: #000;
+	text-align: left;
 }
 
-#myModal{
+.modal_visible{
 	position: fixed;
+	visibility: visible;
+	display: block;
+	z-index: 100 !important;
 }
 
 #myModal h2{
@@ -37,14 +45,18 @@ section form .error p{
 }
 
 
-#background{
+.background_visible{
 	position: absolute;
-	display: none;
+	display: block;
 	height: 100%;
 	width: 100%;
 	background-color: #000;
 	opacity: 0.5;
-	z-index: 0.1;
+	z-index: 1 !important;
+}
+
+.background_invisible{
+	display: none;
 }
 
 

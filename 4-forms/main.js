@@ -3,12 +3,14 @@ window.onload = init;
 
 function init(){
 
+	var form = document.getElementById("form");
 	var doc = document,
 	errorIndicators = [],
 	validationTypes = [],
 	p = doc.createElement('p'),
-	pTags = [],
-	// fieldHeadings = ["Förnamn: ", "Efternamn: ", "Postnummer: ", "E-post: "];
+	fields,
+	noErrors,
+	pTags = [];
 
 	// Field onblur
 	doc.body.addEventListener("blur", function(e) {
@@ -39,7 +41,7 @@ function init(){
 		};
 
 		// retrieve input fields.
-		var fields = doc.querySelectorAll("input");
+		fields = doc.querySelectorAll("input");
 
 		// Iterate through every field and validate.
 		for (var i = 0; i < fields.length; i++) {
@@ -51,19 +53,20 @@ function init(){
 			}
 		};
 		
-		var errorIndicator = errorIndicators.reduce(function(isTrue, indicator, i){
+		noErrors = errorIndicators.reduce(function(isTrue, indicator, i){
 			return isTrue && indicator === true;
 		}, true);
 
-		if(errorIndicator){
+		if(noErrors){
 			confirmPurchase(pTags);
 		}
+
+		e.preventDefault();
 
 	}, false);
 };
 
 function validateField(value, fieldID, className) {
-	console.log(className);
 	var doc = document;
 	var field = document.getElementById(fieldID),
 	errorMsgElement = field.nextSibling.nextSibling,
@@ -119,7 +122,6 @@ function validateField(value, fieldID, className) {
 		errorMsgElement.appendChild(p);
 		errorMsgElement.className = "error";
 
-		console.log(validator.messages);
 		return validator.messages[0];
 	};
 
@@ -156,6 +158,7 @@ var confirmPurchase = function(pTags) {
 	// Create text node for heading
 	headingText = doc.createTextNode('Vänligen bekräfta ditt köp');
 
+	div.setAttribute("class", "popupData");
 	// Set attributes for modal popup button
 	input.type = "submit";
 	input.value = "Bekräfta Köp!";
@@ -193,26 +196,30 @@ var confirmPurchase = function(pTags) {
 	popup.appendChild(div);
 
 	// Reveal modal popup box
-	popup.style.visibility = "visible";
-	popup.style.display = "block";
-	background.style.display = "block";
+	popup.setAttribute("class", "reveal-modal small modal_visible");
+	background.setAttribute("class", "background_visible");
 
+	var form = document.getElementById("form");
 	// Click event listener for closing popup box.
 	doc.body.addEventListener("click", function(e){
 		e = e || window.event;
 		var target = (typeof e.target !== "undefined") ? e.target : e.srcElement;
+		console.log(target);
 
-		// filter out everything closing "x" sybol and modal background area.
+		// If confirm button is clicked, send form.
+		if (target.id === "confirmButton") {
+			form.submit();
+		}
+
+		// filter out everything except closing "x" sybol and modal background area.
 		if (target.className !== "close-reveal-modal" && target.id !== "background") {
 			return;
 		};
 
 		// Hide modal popup box
-		popup.style.visibility = "hidden";
-		popup.style.display = "none";
-		background.style.display = "none";
+		popup.setAttribute("class", "reveal-modal small");
+		background.setAttribute("class", "background");
 
-		console.log(popup);
 		popup.removeChild(div);
 
 	}, false);
