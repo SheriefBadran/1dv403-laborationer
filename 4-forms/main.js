@@ -141,7 +141,7 @@ function validateField(value, fieldID, className) {
 var confirmPurchase = function(pTags) {
 	
 	// Declare needed variables
-	var doc = document, popup, background, priseLevelList, priseLevel, priseData,
+	var doc = document, popup, background, form, priseLevelList, priseLevel, priseData,
 
 	// Create input tag for modal popup button
 	input = doc.createElement('input'),
@@ -199,7 +199,7 @@ var confirmPurchase = function(pTags) {
 	popup.setAttribute("class", "reveal-modal small modal_visible");
 	background.setAttribute("class", "background_visible");
 
-	var form = document.getElementById("form");
+	form = document.getElementById("form");
 	// Click event listener for closing popup box.
 	doc.body.addEventListener("click", function(e){
 		e = e || window.event;
@@ -221,6 +221,6 @@ var confirmPurchase = function(pTags) {
 		background.setAttribute("class", "background");
 
 		popup.removeChild(div);
-
+		
 	}, false);
 }

@@ -27,7 +27,7 @@ var validator = {
 
 		for (i in data) {
 			if (data.hasOwnProperty(i)) {
-				console.log(data[i]);
+
 				// Initialize type with validation types set to config object.
 				validationType = this.config[i];
 
