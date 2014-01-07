@@ -1,0 +1,14 @@
+.message {
+  position: absolute;
+  left: 20%;
+  top: 50px;
+}
+
+textarea {
+  position: absolute;
+  height: 50px;
+  width: 60%;
+  max-height: 60px;
+  left: 21%;
+  top: 70%;
+}

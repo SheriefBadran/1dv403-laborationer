@@ -1,0 +1,62 @@
+.menuBar {
+  position: absolute;
+  background-color: #343434;
+  border-bottom: 2px solid #000;
+  width: 100%;
+  height: 30px;
+  top: 41px;
+  left: 0;
+}
+
+div .menuBar ul {
+	padding: 0;
+	margin: 0;
+	background-color: #343434;
+	cursor: default;
+	/* Firefox bug fix - some fonts increase the (vertical) spacing. Reset with line-height: 1 */
+	line-height: 1;
+}
+
+div .menuBar ul li {
+	float: left;
+	list-style: none;
+}
+
+div .menuBar ul li a {
+	padding: 8px 15px;
+	display: block;
+	text-decoration: none;
+	color: #fff;
+	font-family: Arial;
+}
+
+div .menuBar ul li a:hover,
+div .menuBar ul li:hover a {
+	background-color: #202020;
+}
+
+div .menuBar ul ul {
+	position: absolute;
+	left: -999em;
+}
+
+div .menuBar ul li:hover ul {
+	left: auto;
+}
+
+div .menuBar ul li ul li {
+	float: none;
+}
+
+div .menuBar ul li:hover ul li a {
+	background-color: #343434;
+}
+
+/* This rool is added on the the rool above */
+div .menuBar ul li:hover ul li a:hover {
+	background-color: #202020;
+}
+
+.clear{
+	clear: both;
+}
