@@ -1,42 +1,8 @@
 'use strict';
 
 // global dependencies
-// var Window = WEBAPP.WinHandler.WinStorage;
-// console.log(Window);
-// var winHandler = WEBAPP.WinHandler;
-// var winStorage = new winHandler.WinStorage(60, 100, 20);
-
-// var PwdControler = {
-// 	init: function() {
-// 		var that = this;
-
-// 		var namespaces = that.getNameSpaces();
-// 		console.log(namespaces);
-// 		that.test();
-// 	},
-
-// 	getNameSpaces: function() {
-// 		console.log(WEBAPP.WinHandler.WinStorage);
-// 		var WindowStorage = WEBAPP.WinHandler.WinStorage,
-// 		Window = WEBAPP.WinHandler.Window,
-// 		ThumbNailWindow = WEBAPP.WinHandler.ThumbNailWindow,
-// 		ImageWindow = WEBAPP.WinHandler.ImageWindow,
-// 		RSSWindow = WEBAPP.WinHandler.RSSWindow;
-
-// 		return {
-// 			WindowStorage: WindowStorage,
-// 			Window: Window,
-// 			ThumbNailWindow: ThumbNailWindow,
-// 			ImageWindow: ImageWindow,
-// 			RSSWindow: RSSWindow
-// 		};
-// 	},
-
-// 	test: function(argument) {
-// 		var ns_test = this.getNameSpaces();
-// 		console.log(ns_test);
-// 	}
-// }
+var winHandler = WEBAPP.WinHandler;
+var winStorage = new winHandler.WinStorage(60, 100, 20);
 
 var PwdControler = {
 
@@ -44,8 +10,6 @@ var PwdControler = {
 
 		var doc = document;
 		var that = this;
-		var WindowStorage = WEBAPP.WinHandler.WinStorage;
-		var WinStorage = new WindowStorage(60, 100, 20);
 		var button = doc.querySelector("button");
 		var dockBoard = doc.querySelector("#dock");
 		
@@ -68,48 +32,43 @@ var PwdControler = {
 			if (target.alt === "TumbnailClickIcon") {
 
 				// Pass work to controler logic
-				that.openNewImageViewer(WinStorage);
+				that.openNewImageViewer();
 			};
 
 			// If rss-icon is clicked
 			if (target.alt === "RssClickIcon") {
 
 				// Pass work to controler logic
-				that.openNewRssReader(WinStorage);
+				that.openNewRssReader();
 			};
 
 		});
 	},
 
-	openNewImageViewer: function(WindowStorage) {
+	openNewImageViewer: function() {
 		var that = this;
 
 		// Create a new unique thumbNailWindow.
-		var ThumbNailWindow = WEBAPP.WinHandler.ThumbNailWindow;
-		var TN_Window = new ThumbNailWindow();
+		var TN_Window = new winHandler.ThumbNailWindow();
 
 		that.setWindowProperties(TN_Window);
-		that.saveWindow(TN_Window, WindowStorage);
-		that.deleteWindowOnClick(TN_Window, WindowStorage);
+		that.saveWindow(TN_Window);
+		that.deleteWindowOnClick(TN_Window);
 		TN_Window.renderTopBarHeader();
-		that.loadImagesFromServer(TN_Window, WindowStorage);
+		that.loadImagesFromServer(TN_Window);
 	},
 
-	openNewRssReader: function(WindowStorage) {
+	openNewRssReader: function() {
 		var that = this;
 
-		var RSSWindow = WEBAPP.WinHandler.RSSWindow
-		var RssWindow = new RSSWindow();
-
+		var RssWindow = new winHandler.RSSWindow();
 		that.setWindowProperties(RssWindow);
-		that.saveWindow(RssWindow, WindowStorage);
-		that.deleteWindowOnClick(RssWindow, WindowStorage);
+		that.saveWindow(RssWindow);
+		that.deleteWindowOnClick(RssWindow);
 		RssWindow.renderTopBarHeader('css/images/circle_rss.png', 'Rss Reader');
 		RssWindow.changeWindowCssClass('RSSWindow');
-		RssWindow.renderMenu();
-		that.readRSSFromServer(RssWindow, WindowStorage);
-
-
+		RssWindow.renderMenuBar();
+		that.readRSSFromServer(RssWindow);
 	},
 
 	setWindowProperties: function(win) {
@@ -117,20 +76,20 @@ var PwdControler = {
 		win.setDragDrop();
 	},
 
-	saveWindow: function(win, WindowStorage) {
-		WindowStorage.setWindow(win, WEBAPP.WinHandler.Window);
+	saveWindow: function(win) {
+		winStorage.setWindow(win);
 	},
 
-	deleteWindowOnClick: function(win, WindowStorage) {
-		WindowStorage.deleteWindowOnClick(win);	
+	deleteWindowOnClick: function(win) {
+		winStorage.deleteWindowOnClick(win);	
 	},
 
-	loadImagesFromServer: function(win, WindowStorage) {
+	loadImagesFromServer: function(win) {
 		var that = this;
 		var Window = win.win;
-		// var WinStorage = WindowStorage;
+		console.log(Window);
 		var imageData = {};
-		// var AjaxCall = new ajax("http://homepage.lnu.se/staff/tstjo/labbyServer/imgviewer/");
+		var AjaxCall = new ajax("http://homepage.lnu.se/staff/tstjo/labbyServer/imgviewer/");
 
 		var renderImages = function(response) {
 
@@ -200,7 +159,7 @@ var PwdControler = {
 			return imageData;
 		};
 
-		var viewImageOnClick = function(imageData, WindowStorage) {
+		var viewImageOnClick = function(imageData) {
 			console.log(imageData);
 			var viewImage = function(e) {
 
@@ -210,13 +169,12 @@ var PwdControler = {
 			    	return;
 			    };
 
-			    var ImageWindow = WEBAPP.WinHandler.ImageWindow
-			    var imageWindow = new ImageWindow();
+			    var imageWindow = new winHandler.ImageWindow();
 
 			    // set image window properties and 
 			    that.setWindowProperties(imageWindow);
-			    that.saveWindow(imageWindow, WindowStorage);
-			    that.deleteWindowOnClick(imageWindow, WindowStorage);
+			    that.saveWindow(imageWindow);
+			    that.deleteWindowOnClick(imageWindow);
 			    imageWindow.renderTopBarHeader();
 
 			    var imageWindowData = target.id.split('-');
@@ -248,36 +206,11 @@ var PwdControler = {
 		}, 300);
 
 		// Make ajax call and pass callback functions that will be executed on success.
-		// AjaxCall.getImages(renderImages, viewImageOnClick, win);
-		win.getImages("http://homepage.lnu.se/staff/tstjo/labbyServer/imgviewer/", renderImages, viewImageOnClick, win, WindowStorage);
+		AjaxCall.getImages(renderImages, viewImageOnClick, win); 
 	},
 
-	readRSSFromServer: function(win, WindowStorage) {
-		var Window = win.win;
-
-		var renderRSS = function(response) {
-			var string = "string";
-			var div = document.createElement('div');
-			div.setAttribute('class', 'rssWrapper');
-			div.innerHTML = response;
-			// div.innerHTML = response;
-			console.log(typeof string);
-			console.log(response);
-			console.log(div);
-			Window.appendChild(div);
-			// Window.innerHTML = div;
-			// var response = "hej";
-			// var test = document.createTextNode(response);
-			// console.log(typeof test);
-			// // Window.appendChild(document.createTextNode(response));
-			// console.log(Window);
-		};
-
-		setTimeout(function() {
-			win.statusSpan.setAttribute('class', 'showAjaxLoader');
-		}, 300);
-		console.log(win.getBoundingClientRect);
-		win.getRSSFead("http://homepage.lnu.se/staff/tstjo/labbyServer/rssproxy/?url="+escape("http://www.dn.se/m/rss/senaste-nytt"), renderRSS, win, WindowStorage);
+	readRSSFromServer: function(win) {
+		
 	}
 };
 

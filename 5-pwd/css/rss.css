@@ -1,0 +1,27 @@
+/*.rssWrapper {
+	position: absolute;
+	width: 70%;
+}*/
+
+.rssFeed {
+	position: absolute;
+	top: 75px;
+	height: 320px;
+	width: 100%;
+	overflow: scroll;
+	background-color: #EEE;
+	font-family: Arial;
+	word-wrap: break-word;
+}
+
+.rssFeed h2 {
+	font-size: 1em;
+	background-color: #89C88A;
+	border-top: 2px solid #209220;
+	border-bottom: 2px solid #209220;
+	padding: 10px;
+}
+
+a, h2 {
+	padding-left: 10px;
+}

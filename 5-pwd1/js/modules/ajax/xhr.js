@@ -294,176 +294,70 @@ AJAX.xhr = (function()
 	
 	// facade and public API
 	return{
-		Xhr: function(args)
-		{
-			this.makeCall = function() {
-				var ajaxSettings =
+		makeCall: function(args)
+		{			
+			var ajaxSettings =
+			{
+				url: settings.url(args),
+				contentType: settings.contentType(args),
+				type: settings.type(args),
+				data: settings.data(args),
+				success: settings.success(args),
+				complete: settings.complete(args),
+				async: settings.async(args),
+				showErrors: settings.showErrors(args),
+				error: settings.error(args)
+			};
+			
+			// group the RSC-parameters in an object, RSC is a shortening for RequestStateChange.
+			// this object is to be sent as a parameter in handleRequestStateChange.
+			var rscParam =
+			{
+				success: ajaxSettings.success,
+				complete: ajaxSettings.complete,
+				error: ajaxSettings.error
+			};
+			
+			// create XMLHttpRequesObject
+			var xhr = xhrFunctions.createXmlHttp();
+			
+			if(ajaxSettings.type === "POST")
+			{
+				xhr.open(ajaxSettings.type, ajaxSettings.url, ajaxSettings.async);
+				xhr.onreadystatechange = function()
 				{
-					url: settings.url(args),
-					contentType: settings.contentType(args),
-					type: settings.type(args),
-					data: settings.data(args),
-					success: settings.success(args),
-					complete: settings.complete(args),
-					async: settings.async(args),
-					showErrors: settings.showErrors(args),
-					error: settings.error(args)
+					xhrFunctions.handleRequestStateChange(xhr, rscParam);
 				};
+				xhr.setRequestHeader("Content-Type", ajaxSettings.contentType);
+				xhr.send(ajaxSettings.data);
+			}
+			else if(ajaxSettings.type === "GET")
+			{
+				// initialize the requests cache
+				var cache = [],
 				
-				// group the RSC-parameters in an object, RSC is a shortening for RequestStateChange.
-				// this object is to be sent as a parameter in handleRequestStateChange.
-				var rscParam =
+				// initialize the request query string to null
+				params = null;
+				
+				params = "?" + ajaxSettings.data;
+				
+				// make sure not adding null params
+				if(params)
 				{
-					success: ajaxSettings.success,
-					complete: ajaxSettings.complete,
-					error: ajaxSettings.error
-				};
-
-				var typeError = null;
-
-				var createXmlHttp = function() {
-					// will store the reference to the XMLHttpRequest object
-					var xmlHttp;
-					// create the XMLHttpRequest object
-					try
-					{
-						// assume IE7 or newer or other modern browsers
-						xmlHttp = new XMLHttpRequest();
-					}
-					catch(e)
-					{
-						// assume IE6 or older
-						try
-						{
-							xmlHttp = new ActiveXObject("Microsoft.XMLHttp");
-						}
-						catch(e){ }
-					}
-					// return the created object or display an error message
-					if(!xmlHttp)
-					{
-						alert("Error creating the XMLHttpRequest object");
-					}
-					else
-					{
-						return xmlHttp;
-					}
-				};
-
-				var readResponse = function(xhr, onsuccess) {
-					console.log(xhr.getResponseHeader("Content-Type"));
-					try
-					{
-						// retrieve the response content type
-						var contentType = xhr.getResponseHeader("Content-Type");
-
-						// build the json object if the response has one
-						if(contentType == "application/json")
-						{
-							response = JSON.parse(xhr.responseText);
-							console.log(response);
-						}
-						// get the DOM element if the response is XML
-						else if(contentType == "text/xml")
-						{
-							response = xhr.responseXml;
-							console.log(response);
-						}
-						else
-						{
-							response = xhr.responseText;
-							// console.log(response);
-						}
-						// call the callback function if any
-						if(onsuccess)
-						{
-							var successholder = new onsuccess(xhr, response, xhr.status);
-							successholder.onsuccess();
-						}
-					}
-					catch(e)
-					{
-						typeError = e.toString();
-					}
-				};
-
-				var handleRequestStateChange = function(xhr, rscParam) {	
-					// create local variables to work with instead of nested properties, resulting in better performance.
-					var onsuccess = rscParam.success,
-					oncomplete = rscParam.complete,
-					error = rscParam.error;
-					
-					// when readyState is 4, we read the server response
-					if(xhr.readyState == 4)
-					{
-						try
-						{
-							readResponse(xhr, onsuccess);
-						}
-						catch(e)
-						{
-							alert(e.toString());
-						}
-						// if HTTP status is "OK", an oncomplete function (with access to the xhr-object and status) can be called
-						if(xhr.status == 200)
-						{
-							if(oncomplete)
-							{
-								oncomplete(xhr, xhr.status);
-							}
-						}
-						else
-						{
-							// call the error callback function to display errors. typeError is a module private property
-							if(error)
-							{
-								error(xhr, xhr.statusText, typeError);
-							}
-						}
-					}
-				};
-				
-				// create XMLHttpRequesObject
-				var xhr = createXmlHttp();
-				
-				if(ajaxSettings.type === "POST")
-				{
-					xhr.open(ajaxSettings.type, ajaxSettings.url, ajaxSettings.async);
-					xhr.onreadystatechange = function()
-					{
-						handleRequestStateChange(xhr, rscParam);
-					};
-					xhr.setRequestHeader("Content-Type", ajaxSettings.contentType);
-					xhr.send(ajaxSettings.data);
+					cache.push(params);
 				}
-				else if(ajaxSettings.type === "GET")
+				
+				var cacheEntry = cache.shift();
+				
+				xhr.open(ajaxSettings.type, ajaxSettings.url + cacheEntry, ajaxSettings.async);
+				xhr.onreadystatechange = function()
 				{
-					// initialize the requests cache
-					var cache = [],
-					
-					// initialize the request query string to null
-					params = null;
-					
-					params = "?" + ajaxSettings.data;
-					
-					// make sure not adding null params
-					if(params)
-					{
-						cache.push(params);
-					}
-					
-					var cacheEntry = cache.shift();
-					
-					xhr.open(ajaxSettings.type, ajaxSettings.url + cacheEntry, ajaxSettings.async);
-					xhr.onreadystatechange = function()
-					{
-						handleRequestStateChange(xhr, rscParam);
-					};
-					xhr.setRequestHeader("Content-Type", ajaxSettings.contentType);
-					xhr.send(null);
-				}
-			};			
+					xhrFunctions.handleRequestStateChange(xhr, rscParam);
+				};
+				xhr.setRequestHeader("Content-Type", ajaxSettings.contentType);
+				xhr.send(null);
+			}
 		}
 	};
 }());
-// var Ajax = AJAX.xhr;
+var Ajax = AJAX.xhr;

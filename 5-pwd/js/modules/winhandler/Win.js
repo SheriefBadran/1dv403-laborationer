@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 // Default initialization of WEBAPP
 var WEBAPP = WEBAPP || {};
 
@@ -33,6 +33,11 @@ WEBAPP.namespace = function(ns_string)
 
 // Define namespace for Win module
 WEBAPP.namespace('WinHandler');
+// WEBAPP.namespace('WinHandler.WinStorage');
+// WEBAPP.namespace('WinHandler.Window');
+// WEBAPP.namespace('WinHandler.ThumbNailWindow');
+// WEBAPP.namespace('WinHandler.ImageWindow');
+// WEBAPP.namespace('WinHandler.RSSWindow');
 
 // WinHandler MODULE
 /**
@@ -45,7 +50,7 @@ WEBAPP.namespace('WinHandler');
  * []
  */
 
-WEBAPP.WinHandler = (function()
+WEBAPP.WinHandler.WinStorage = (function()
 {
 	// dependencies: none
 	
@@ -53,14 +58,14 @@ WEBAPP.WinHandler = (function()
 	// Private methods below are called internally within the module.
 
 	// Called from 
-	var deleteWindow = function(windows, winObj, winElement) {
+	var deleteWindow = function(windows, windowInstance, winElement) {
 
 		// handler = getFocusHandler();
 		winElement.parentNode.removeChild(winElement);
 
 		var i;
 		for (i = 0; i < windows.length; i++) {
-			if (winObj === windows[i]) {
+			if (windowInstance === windows[i]) {
 				// winElement.removeEventListener('mousedown', handler, false);
 				windows.splice(i, 1);
 			};
@@ -94,8 +99,8 @@ WEBAPP.WinHandler = (function()
 		var max_zIndex;
 
 		if (windows.length > 1) {
-			zIndexes = windows.map(function(winObj, i) {
-				return parseInt(winObj.win.style.zIndex);
+			zIndexes = windows.map(function(windowInstance, i) {
+				return parseInt(windowInstance.win.style.zIndex);
 			});
 		};
 
@@ -112,6 +117,7 @@ WEBAPP.WinHandler = (function()
 	
 	// optionally one-time init procedures:
 	var doc = document,
+	Ajax = AJAX.xhr,
 	body = doc.body,
 	that;
 	
@@ -130,15 +136,15 @@ WEBAPP.WinHandler = (function()
 		this.posY = posY ? posY : 60;
 		this.dYdX = dYdX ? dYdX : 10;
 
-		this.setWindow = function(winObj) {
+		this.setWindow = function(windowInstance, constructorFunc) {
 
-			if (winObj instanceof Win) {
+			if (windowInstance instanceof constructorFunc) {
 
 				// Store window instance
-				windows.push(winObj);
+				windows.push(windowInstance);
 
-				// Retrieve window element from winObj
-				var win = winObj.win;
+				// Retrieve window element from windowInstance
+				var win = windowInstance.win;
 
 				// Set Focus on new window.
 				if (windows.length > 1) {
@@ -147,7 +153,9 @@ WEBAPP.WinHandler = (function()
 				};
 
 				// Set new window screen position.
-				if (winObj.dragDrop === true) {
+				if (windowInstance.dragDrop === true) {
+
+
 					win.style.left = this.posX + (this.dYdX * windows.length) + "px";
 					win.style.top = this.posY + (this.dYdX * windows.length) + "px";
 				};
@@ -192,20 +200,20 @@ WEBAPP.WinHandler = (function()
 			return windows.length;
 		}
 
-		this.getWindow = function(winObj) {
+		this.getWindow = function(windowInstance) {
 			var win = windows.filter(function(w) {
-				return w === winObj;
+				return w === windowInstance;
 			});
 			return win[0];
 		};
 
-		this.deleteWindowOnClick = function(winObj) {
+		this.deleteWindowOnClick = function(windowInstance) {
 			that = this;
 			var win = windows.filter(function(w) {
 
-				if (w === winObj) {
+				if (w === windowInstance) {
 
-					winObj.win.addEventListener('click', function(e) {
+					windowInstance.win.addEventListener('click', function(e) {
 						var target = e.srcElement || e.target;
 
 						if (target.className !== 'deleteIcon') {
@@ -222,6 +230,83 @@ WEBAPP.WinHandler = (function()
 
 		};
 	};
+
+	// return the constructor to be assigned to the new namespace
+	return WinStorage;
+}());
+
+WEBAPP.WinHandler.Window = (function()
+{
+	// dependencies: none
+	
+	// ********** PRIVATE MODULE PROPERTIES AND METHODS **********
+	// Private methods below are called internally within the module.
+
+	// Called from 
+	var deleteWindow = function(windows, windowInstance, winElement) {
+
+		// handler = getFocusHandler();
+		winElement.parentNode.removeChild(winElement);
+
+		var i;
+		for (i = 0; i < windows.length; i++) {
+			if (windowInstance === windows[i]) {
+				// winElement.removeEventListener('mousedown', handler, false);
+				windows.splice(i, 1);
+			};
+		};
+	};
+
+	var focus = function(windows, win, target) {
+		var windowOnFocus;
+		var max_zIndex;
+
+		if (windows.length > 1) {
+			var max_zIndex = calculateMaxZIndex(win, windows);
+			win.style.zIndex = max_zIndex + 10;
+		};
+		
+		windowOnFocus = target.className === 'topbar' ? target.parentNode : target;
+
+		windows.filter(function(w) {
+			if (w.win !== windowOnFocus) {
+				console.log("false");
+				if (w.win.style.zIndex > 1) {
+					w.win.style.zIndex = parseInt(w.win.style.zIndex) - 1;
+				};
+			}
+		});
+	};
+
+	var calculateMaxZIndex = function(win, windows) {
+		console.log('calculate index');
+		var zIndexes = [];
+		var max_zIndex;
+
+		if (windows.length > 1) {
+			zIndexes = windows.map(function(windowInstance, i) {
+				return parseInt(windowInstance.win.style.zIndex);
+			});
+		};
+
+		if (zIndexes.length > 1) {
+			var max_zIndex = zIndexes.reduce(function(prev_zIndex, current_zIndex, i, zIndexes) {
+				return Math.max(prev_zIndex, current_zIndex);
+			});
+
+			win.style.zIndex = max_zIndex + 1;
+		};
+
+		return max_zIndex;
+	}
+	
+	// optionally one-time init procedures:
+	var doc = document,
+	Ajax = AJAX.xhr,
+	body = doc.body,
+	that;
+	
+	// ********** PUBLIC API **********
 	
 	// Define a Super Class
 	var Win = function(){
@@ -269,18 +354,19 @@ WEBAPP.WinHandler = (function()
 			body.appendChild(that.win);
 		};
 
-		this.getImages = function(url, renderImages, viewImage, win) {
+		this.getImages = function(url, renderImages, viewImageOnClick, win, WindowStorage) {
 			var start = +new Date(),
 			stop,
 			responseTime;
+			var AjaxHandler = AJAX.xhr;
 
-			Ajax.makeCall({
-				url: url,
-				contentType: "application/x-www-form-urlencoded",
-				type: "POST",
-				async: true,
-				// data: "mode=tabmenu",
-				success: function (xhr, response, status) {
+			function success(xhr, response, status) {
+				var that = this;
+				that.xhr = xhr;
+				that.response = response;
+				that.status = status;
+
+				this.onsuccess = function () {
 					if(xhr.responseText.indexOf("ERRNO") >= 0 || xhr.responseText.indexOf("error:") >= 0 || xhr.responseText.length == 0) {
 						alert(xhr.responseText.length == 0 ? "Server error." : response);
 					}
@@ -297,13 +383,23 @@ WEBAPP.WinHandler = (function()
 						responseTime = ((stop-start)/1000);
 						var statusText = numberOfImages + " bilder laddade på " + responseTime.toString() + " s";
 
+						// Remove Ajaxloader
 						win.removeAjaxLoader();
 						win.statusSpan.appendChild(document.createTextNode(statusText));
 
 						// Call second callback function to view image.
-						viewImage(imageData);
+						viewImageOnClick(imageData, WindowStorage);
 					}
-				},
+				};
+			};
+
+			var ajax = new AjaxHandler.Xhr({
+				url: url,
+				contentType: "application/x-www-form-urlencoded",
+				type: "GET",
+				async: true,
+				// data: "mode=tabmenu",
+				success: success,
 				complete: function (xhr, status) {
 					console.log("Ajax Call is completed!");
 				},
@@ -317,6 +413,70 @@ WEBAPP.WinHandler = (function()
 					console.log("Error accessing the server! " + (debugMode ? xhr.status + " " + statusText + "\r\n" + typeError: ""));
 				}
 			});
+
+			ajax.makeCall();
+		};
+
+		this.getRSSFead = function(url, renderRSS, win, WindowStorage) {
+			var start = +new Date(),
+			stop,
+			responseTime;
+			var AjaxHandler = AJAX.xhr;
+
+			function success(xhr, response, status) {
+				var that = this;
+				that.xhr = xhr;
+				that.response = response;
+				that.status = status;
+
+				this.onsuccess = function () {
+					if(xhr.responseText.indexOf("ERRNO") >= 0 || xhr.responseText.indexOf("error:") >= 0 || xhr.responseText.length == 0) {
+						alert(xhr.responseText.length == 0 ? "Server error." : response);
+					}
+					else {
+
+						// Call first callback function to render images.
+						// console.log(response);
+						renderRSS(xhr.response)
+						var statusSpan = win.statusSpan;
+
+						stop = +new Date();
+
+						// Calculate response time for ajax call expressed in seconds.
+						responseTime = ((stop-start)/1000);
+						var statusText = "Laddat på " + responseTime.toString() + " s";
+
+						win.removeAjaxLoader();
+						win.statusSpan.appendChild(document.createTextNode(statusText));
+
+						// Call second callback function to view image.
+						
+					}
+				};
+			};
+
+			var ajax = new AjaxHandler.Xhr({
+				url: url,
+				contentType: "application/x-www-form-urlencoded",
+				type: "POST",
+				async: true,
+				// data: "mode=tabmenu",
+				success: success,
+				complete: function (xhr, status) {
+					console.log("Ajax Call is completed!");
+				},
+				showErrors: true,
+				error: function(xhr, statusText, typeError) {
+					// when set to true, display detailed error messages
+					var debugMode = true;
+
+					// display error message, with more technical details if debugMode is true
+					// for documentation, remember that all errorinfo is accessible in xhr.responseText
+					console.log("Error accessing the server! " + (debugMode ? xhr.status + " " + statusText + "\r\n" + typeError: ""));
+				}
+			});
+
+			ajax.makeCall();
 		};
 	};
 
@@ -362,17 +522,31 @@ WEBAPP.WinHandler = (function()
 			    if (!win) {
 					return;
 				};
-			    
-				win.style.left = (e.clientX - win.diffX) + 'px';
+				console.log(win);
+			    if ((e.clientX - win.diffX) < 0) {
+			    	win.style.left = 0 + "px";
+			    	return;
+			    };
+
+			    if ((e.clientX - win.diffX) > 820) {
+			    	win.style.left = 820 + "px";
+			    	return;
+			    };
+
+			    if ((e.clientX - win.diffX)) {
+
+			    };
+
+			    win.style.left = (e.clientX - win.diffX) + 'px';
 			    win.style.top  = (e.clientY - win.diffY) + 'px';
 
 				// Test for DOM Level 2 events support.
-				if(typeof e.preventDefault === "function"){
+				if (typeof e.preventDefault === "function"){
 					e.preventDefault();
 				};
 
 				// IE.
-				if(typeof e.returnValue !== "undefined"){
+				if (typeof e.returnValue !== "undefined"){
 					e.returnValue = false;
 				};
 
@@ -469,14 +643,92 @@ WEBAPP.WinHandler = (function()
 		}
 	};
 
+	// return the constructor to be assigned to the new namespace
+	return Win;
+}());
+
+WEBAPP.WinHandler.ThumbNailWindow = (function()
+{
+	// dependencies: none
+	
+	// ********** PRIVATE MODULE PROPERTIES AND METHODS **********
+	// Private methods below are called internally within the module.
+
+	// Called from 
+	var deleteWindow = function(windows, windowInstance, winElement) {
+
+		// handler = getFocusHandler();
+		winElement.parentNode.removeChild(winElement);
+
+		var i;
+		for (i = 0; i < windows.length; i++) {
+			if (windowInstance === windows[i]) {
+				// winElement.removeEventListener('mousedown', handler, false);
+				windows.splice(i, 1);
+			};
+		};
+	};
+
+	var focus = function(windows, win, target) {
+		var windowOnFocus;
+		var max_zIndex;
+
+		if (windows.length > 1) {
+			var max_zIndex = calculateMaxZIndex(win, windows);
+			win.style.zIndex = max_zIndex + 10;
+		};
+		
+		windowOnFocus = target.className === 'topbar' ? target.parentNode : target;
+
+		windows.filter(function(w) {
+			if (w.win !== windowOnFocus) {
+				console.log("false");
+				if (w.win.style.zIndex > 1) {
+					w.win.style.zIndex = parseInt(w.win.style.zIndex) - 1;
+				};
+			}
+		});
+	};
+
+	var calculateMaxZIndex = function(win, windows) {
+		console.log('calculate index');
+		var zIndexes = [];
+		var max_zIndex;
+
+		if (windows.length > 1) {
+			zIndexes = windows.map(function(windowInstance, i) {
+				return parseInt(windowInstance.win.style.zIndex);
+			});
+		};
+
+		if (zIndexes.length > 1) {
+			var max_zIndex = zIndexes.reduce(function(prev_zIndex, current_zIndex, i, zIndexes) {
+				return Math.max(prev_zIndex, current_zIndex);
+			});
+
+			win.style.zIndex = max_zIndex + 1;
+		};
+
+		return max_zIndex;
+	}
+	
+	// optionally one-time init procedures:
+	var doc = document,
+	Ajax = AJAX.xhr,
+	body = doc.body,
+	that;
+	
+	// ********** PUBLIC API **********
+
 	// Define a Win sub class
-	ThumbNailWindow.prototype = new Win();
+	var Window = WEBAPP.WinHandler.Window;
+	ThumbNailWindow.prototype = new Window();
 	ThumbNailWindow.prototype.constructor = ThumbNailWindow;
 	// var WindowStorage = new WinStorage(60, 100, 20);
 	function ThumbNailWindow() {
 
 		// Call super class constructor
-		Win.call(this);
+		Window.call(this);
 	};
 
 	ThumbNailWindow.prototype.renderTopBarHeader = function(windowIconSrc, windowHeaderText) {
@@ -507,7 +759,86 @@ WEBAPP.WinHandler = (function()
 		this.statusSpan.firstChild.remove();
 	};
 
+	// return the constructor to be assigned to the new namespace
+	return ThumbNailWindow;
+}());
+
+
+WEBAPP.WinHandler.ImageWindow = (function()
+{
+	// dependencies: none
+	
+	// ********** PRIVATE MODULE PROPERTIES AND METHODS **********
+	// Private methods below are called internally within the module.
+
+	// Called from 
+	var deleteWindow = function(windows, windowInstance, winElement) {
+
+		// handler = getFocusHandler();
+		winElement.parentNode.removeChild(winElement);
+
+		var i;
+		for (i = 0; i < windows.length; i++) {
+			if (windowInstance === windows[i]) {
+				// winElement.removeEventListener('mousedown', handler, false);
+				windows.splice(i, 1);
+			};
+		};
+	};
+
+	var focus = function(windows, win, target) {
+		var windowOnFocus;
+		var max_zIndex;
+
+		if (windows.length > 1) {
+			var max_zIndex = calculateMaxZIndex(win, windows);
+			win.style.zIndex = max_zIndex + 10;
+		};
+		
+		windowOnFocus = target.className === 'topbar' ? target.parentNode : target;
+
+		windows.filter(function(w) {
+			if (w.win !== windowOnFocus) {
+				console.log("false");
+				if (w.win.style.zIndex > 1) {
+					w.win.style.zIndex = parseInt(w.win.style.zIndex) - 1;
+				};
+			}
+		});
+	};
+
+	var calculateMaxZIndex = function(win, windows) {
+		console.log('calculate index');
+		var zIndexes = [];
+		var max_zIndex;
+
+		if (windows.length > 1) {
+			zIndexes = windows.map(function(windowInstance, i) {
+				return parseInt(windowInstance.win.style.zIndex);
+			});
+		};
+
+		if (zIndexes.length > 1) {
+			var max_zIndex = zIndexes.reduce(function(prev_zIndex, current_zIndex, i, zIndexes) {
+				return Math.max(prev_zIndex, current_zIndex);
+			});
+
+			win.style.zIndex = max_zIndex + 1;
+		};
+
+		return max_zIndex;
+	}
+	
+	// optionally one-time init procedures:
+	var doc = document,
+	Ajax = AJAX.xhr,
+	body = doc.body,
+	that;
+	
+	// ********** PUBLIC API **********
+
 	// Define a Win sub class to ThumbNailWindow
+	var ThumbNailWindow = WEBAPP.WinHandler.ThumbNailWindow;
 	ImageWindow.prototype = new ThumbNailWindow();
 	ImageWindow.prototype.constructor = ImageWindow;
 
@@ -517,28 +848,92 @@ WEBAPP.WinHandler = (function()
 		ThumbNailWindow.call(this);
 	};
 
+	// return the constructor to be assigned to the new namespace
+	return ImageWindow;
+}());
+
+WEBAPP.WinHandler.RSSWindow = (function()
+{
+	// dependencies: none
+	
+	// ********** PRIVATE MODULE PROPERTIES AND METHODS **********
+	// Private methods below are called internally within the module.
+
+	// Called from 
+	var deleteWindow = function(windows, windowInstance, winElement) {
+
+		// handler = getFocusHandler();
+		winElement.parentNode.removeChild(winElement);
+
+		var i;
+		for (i = 0; i < windows.length; i++) {
+			if (windowInstance === windows[i]) {
+				// winElement.removeEventListener('mousedown', handler, false);
+				windows.splice(i, 1);
+			};
+		};
+	};
+
+	var focus = function(windows, win, target) {
+		var windowOnFocus;
+		var max_zIndex;
+
+		if (windows.length > 1) {
+			var max_zIndex = calculateMaxZIndex(win, windows);
+			win.style.zIndex = max_zIndex + 10;
+		};
+		
+		windowOnFocus = target.className === 'topbar' ? target.parentNode : target;
+
+		windows.filter(function(w) {
+			if (w.win !== windowOnFocus) {
+				console.log("false");
+				if (w.win.style.zIndex > 1) {
+					w.win.style.zIndex = parseInt(w.win.style.zIndex) - 1;
+				};
+			}
+		});
+	};
+
+	var calculateMaxZIndex = function(win, windows) {
+		console.log('calculate index');
+		var zIndexes = [];
+		var max_zIndex;
+
+		if (windows.length > 1) {
+			zIndexes = windows.map(function(windowInstance, i) {
+				return parseInt(windowInstance.win.style.zIndex);
+			});
+		};
+
+		if (zIndexes.length > 1) {
+			var max_zIndex = zIndexes.reduce(function(prev_zIndex, current_zIndex, i, zIndexes) {
+				return Math.max(prev_zIndex, current_zIndex);
+			});
+
+			win.style.zIndex = max_zIndex + 1;
+		};
+
+		return max_zIndex;
+	}
+	
+	// optionally one-time init procedures:
+	var doc = document,
+	Ajax = AJAX.xhr,
+	body = doc.body,
+	that;
+	
+	// ********** PUBLIC API **********
+
 	// Define a sub class to Win
+	var ThumbNailWindow = WEBAPP.WinHandler.ThumbNailWindow;
 	RSSWindow.prototype = new ThumbNailWindow();
 	RSSWindow.prototype.constructor = RSSWindow;
 
 	function RSSWindow() {
-		Win.call(this);
+		ThumbNailWindow.call(this);
 	};
-
-	// RSSWindow.prototype.renderMenuBar = function() {
-	// 	console.log(this.win);
-	// }
-
-
-
-
 
 	// return the constructor to be assigned to the new namespace
-	return { 
-		Win: Win, 
-		WinStorage: WinStorage, 
-		ThumbNailWindow: ThumbNailWindow, 
-		ImageWindow: ImageWindow,
-		RSSWindow: RSSWindow
-	};
+	return RSSWindow;
 }());

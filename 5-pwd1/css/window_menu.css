@@ -38,7 +38,6 @@ div .menuBar ul li:hover a {
 div .menuBar ul ul {
 	position: absolute;
 	left: -999em;
-	z-index: 100;
 }
 
 div .menuBar ul li:hover ul {
